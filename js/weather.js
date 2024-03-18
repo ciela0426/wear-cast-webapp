@@ -59,8 +59,25 @@ fetch('http://ip-api.com/json/')
 
                             const forecastElement = document.getElementById('forecast');
                             forecastElement.innerHTML += `날씨: ${weatherDescription}, 온도: ${temperature} 시간: ${time}<br>`;
-
                         }
+
+                        for (let i = 8; i <= 15; i++) {
+                          const weatherDescription = weatherData.list[i].weather[0].description;
+                          const temperature = weatherData.list[i].main.temp;
+                          const time = weatherData.list[i].dt_txt;
+
+                          const forecastElement = document.getElementById('tomorrow-forecast');
+                          forecastElement.innerHTML += `날씨: ${weatherDescription}, 온도: ${temperature} 시간: ${time}<br>`;
+                      }
+
+                      for (let i = 16; i <= 23; i++) {
+                        const weatherDescription = weatherData.list[i].weather[0].description;
+                        const temperature = weatherData.list[i].main.temp;
+                        const time = weatherData.list[i].dt_txt;
+
+                        const forecastElement = document.getElementById('Aftertomorrow-forecast');
+                        forecastElement.innerHTML += `날씨: ${weatherDescription}, 온도: ${temperature} 시간: ${time}<br>`;
+                    }
 
 
                         // 24시간 내에 비가 오는지 여부 판단
