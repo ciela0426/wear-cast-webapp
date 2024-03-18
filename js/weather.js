@@ -6,7 +6,7 @@ fetch('http://ip-api.com/json/')
     const lon = data.lon;
     const country = data.country;
     const regionName = data.regionName;
-    
+
 
     // OpenWeatherMap API에 접근하여 날씨 정보 가져오기
     const apiKey = 'a2bef9ef4e8c7cb401ffa5e9cf298192'; // 김융의 key
@@ -20,15 +20,15 @@ fetch('http://ip-api.com/json/')
 
         // 예시: HTML에 결과 출력
         const weatherElement = document.getElementById('weather');
-        const weatherDescription = weatherData.list[0].weather[0].description;
-        const temperature = weatherData.list[0].main.temp;
-        const humidity = weatherData.list[0].main.humidity;
-        const windSpeed = weatherData.list[0].wind.speed;
-        const maxTemperature = weatherData.list[0].main.temp_max;
-        const minTemperature = weatherData.list[0].main.temp_min;
+        const weatherDescription = weatherData.list[2].weather[0].description;
+        const temperature = weatherData.list[2].main.temp;
+        const humidity = weatherData.list[2].main.humidity;
+        const windSpeed = weatherData.list[2].wind.speed;
+        const maxTemperature = weatherData.list[2].main.temp_max;
+        const minTemperature = weatherData.list[2].main.temp_min;
         const sunriseTime = new Date(weatherData.city.sunrise * 1000).toLocaleTimeString();
         const sunsetTime = new Date(weatherData.city.sunset * 1000).toLocaleTimeString();
-        const date = weatherData.list[0].dt_txt;
+        const date = weatherData.list[2].dt_txt;
 
         weatherElement.innerHTML = `나라: ${country}, 도시: ${regionName}<br>
           날씨: ${weatherDescription}, 온도: ${temperature}도<br>
