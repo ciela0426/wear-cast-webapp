@@ -52,14 +52,24 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         const currentTime = new Date().toLocaleTimeString();    //현재시각
         const date = weatherData.list[2].dt_txt;    //측정시각(ex:2024-03-19 09:00:00)
 
+        const currentDate1 = new Date();
+
+        const month = currentDate1.toLocaleString('default', { month: 'long' });
+        const day = currentDate1.getDate();
+        const year = currentDate1.getFullYear();
+        let hour = currentDate1.getHours();
+        const minute = currentDate1.getMinutes();
+
+        const formattedDate = `${month} ${day}일, ${year} ${hour}:${minute < 10 ? '0' : ''}${minute}`;
+
         const timeElement = document.getElementById('current-time');
-        timeElement.innerHTML = `${currentTime}`;
+        timeElement.innerHTML = formattedDate;
 
         const todayWeatherDescElement = document.getElementById('todayWeatherDesc');
         todayWeatherDescElement.innerHTML = `${weatherDescription}`;
 
         const todayWeatherTempElement = document.getElementById('todayWeatherTemp');
-        todayWeatherTempElement.innerHTML = `${temperature}°c`;
+        todayWeatherTempElement.innerHTML = `${temperature}°`;
 
 
 
@@ -101,11 +111,12 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
           // }
 
           // forecastElement.innerHTML += `날씨: ${weatherDescription}, 온도: ${temperature}, 시간: ${time}, 최고 온도: ${maxT}, 최저 온도: ${minT}<br>`;
-         // li 요소 생성
-         const liElement = document.createElement('li');
-            
-         // li 요소 내부에 날씨 정보 추가
-         liElement.innerHTML = `
+
+          // li 요소 생성
+          const liElement = document.createElement('li');
+
+          // li 요소 내부에 날씨 정보 추가
+          liElement.innerHTML = `
              <div class="weather-element last">
                  <div class="element-date">
                      <p class="text-element-day">${time.substr(5, 2)}.${time.substr(8, 2)}</p>
@@ -114,12 +125,12 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
                  <div class="img-element-weather">
                      <img src="./public/images/small_sun.png" alt="">
                  </div>
-                 <p class="element-temp">${temperature}°c</p>
+                 <p class="element-temp">${temperature}°</p>
              </div>
          `;
-         
-         // ul에 li 요소 추가
-         ulElement.appendChild(liElement);
+
+          // ul에 li 요소 추가
+          ulElement.appendChild(liElement);
         }
 
         // forecastElement.innerHTML += `최고 온도: ${max}, 최저 온도: ${min}<br>`;
