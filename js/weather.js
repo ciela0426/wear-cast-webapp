@@ -16,11 +16,6 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
     const locationElement = document.getElementById('location');
     locationElement.innerHTML = `${regionName}, ${country}`;
 
-    // 국가명,지역명,도시명 HTML에 출력
-    // const locationElement = document.getElementById('location');
-    // locationElement.innerHTML = `나라: ${country}<br>지역명: ${regionName}<br>도시: ${city}<br>
-    // 위도: ${lat}<br>경도: ${lon}`;
-
     /*
     2번째 API : 날씨 데이터 받아오기
     위에서 구한 위도,경도를 사용해 해당 지역의 날씨 정보를 얻어온다.
@@ -32,10 +27,6 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
     fetch(weatherApiUrl)
       .then(response => response.json())
       .then(weatherData => {
-        // 날씨 정보 처리
-        console.log(weatherData); // 날씨 정보 콘솔에 출력 또는 원하는 대로 처리
-
-        // const weatherElement = document.getElementById('weather');  //HTML의 id:weather와 연결
         /*
         1번째 기능 : 현재 시간의 날씨 데이터 출력
         한계 : 받아온 api정보는 3시간 단위이기 때문에 정확한 날씨가 아닌 가장 최근 기록된 날씨이다.
@@ -49,45 +40,32 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         const minTemperature = weatherData.list[2].main.temp_min;   //3시간 동안 최저온도
         const sunriseTime = new Date(weatherData.city.sunrise * 1000).toLocaleTimeString(); //일출시간
         const sunsetTime = new Date(weatherData.city.sunset * 1000).toLocaleTimeString();   //일몰시간
-        const currentTime = new Date().toLocaleTimeString();    //현재시각
         const date = weatherData.list[2].dt_txt;    //측정시각(ex:2024-03-19 09:00:00)
+        const currentDate = new Date(); //현재 날짜 얻어옴
 
-        const currentDate1 = new Date();
-
-        const month = currentDate1.toLocaleString('default', { month: 'long' });
-        const day = currentDate1.getDate();
-        const year = currentDate1.getFullYear();
-        let hour = currentDate1.getHours();
-        const minute = currentDate1.getMinutes();
+        //현재 시각을 원하는 포맷으로 출력하기 위한 처리
+        const month = currentDate.toLocaleString('default', { month: 'long' });
+        const day = currentDate.getDate();
+        const year = currentDate.getFullYear();
+        let hour = currentDate.getHours();
+        const minute = currentDate.getMinutes();
 
         const formattedDate = `${month} ${day}일, ${year} ${hour}:${minute < 10 ? '0' : ''}${minute}`;
 
+        //현재 시각, 현재 날씨상태, 현재 온도 HTML로 출력
         const timeElement = document.getElementById('current-time');
-        timeElement.innerHTML = formattedDate;
-
         const todayWeatherDescElement = document.getElementById('todayWeatherDesc');
-        todayWeatherDescElement.innerHTML = `${weatherDescription}`;
-
         const todayWeatherTempElement = document.getElementById('todayWeatherTemp');
+
+        timeElement.innerHTML = formattedDate;
+        todayWeatherDescElement.innerHTML = `${weatherDescription}`;
         todayWeatherTempElement.innerHTML = `${temperature}°`;
-
-
-
-        // const timeElement = document.getElementById('current-time');    //현재 시각 HTML에 출력 id:current-time과 연결
-        // timeElement.innerHTML = `현재 시간: ${currentTime}`;
-
-        // // 현재 시각 날씨 정보 HTML에 출력
-        // weatherElement.innerHTML = `나라: ${country}, 도시: ${regionName}<br>
-        //       날씨: ${weatherDescription}, 온도: ${temperature}도<br>
-        //       습도: ${humidity}%, 풍속: ${windSpeed}m/s<br>
-        //       일출 시간: ${sunriseTime}, 일몰 시간: ${sunsetTime}<br>
-        //       최고 온도: ${maxTemperature}, 최저 온도: ${minTemperature}<br>
-        //       측정 시각: ${date}`;
-
 
         /*
         2번째 기능: 24시간 날씨 출력
         API 정보의 0~7번 인덱스의 정보 출력: 최근 6시간 전/최근 3시간 전/최근 기록/3시간 후/.../15시간 후
+        HTML에서의 반복이 아닌 js에서의 반복으로 처리
+        현재 최고,최저 온도 기능은 구현만 하고 사용하진 않음(무시)
         */
         // 24시간 정보 HTML에 출력
         // const forecastElement = document.getElementById('forecast'); // HTML의 id:forecast와 연결
@@ -167,9 +145,6 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         구현 : 내일의 정보를 얻어오기 위해 현재 날짜를 가져오고 +1 정보 추출(필터링)
         추가적으로 내일 모래도 가능함
         */
-
-        // 현재 날짜 정보를 얻기 위해 Date객체 사용
-        const currentDate = new Date();
 
         // 내일 계산
         const tomorrow = new Date(currentDate);
