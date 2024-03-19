@@ -95,7 +95,7 @@ body>.container>.box-top {
     background-position: center;
 }
 
-.container>.box-top>.box-left-card-weather>.card-right {
+.container>.box-top>.box-left-card-weather>.box-lcard-right {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -104,7 +104,7 @@ body>.container>.box-top {
     justify-content: space-between;
 }
 
-.container>.box-top>.box-left-card-weather>.card-right>.card-explain {
+.container>.box-top>.box-left-card-weather>.box-lcard-right>.card-explain {
     font-family: Pretendard;
     font-size: 20px;
     font-weight: 300;
@@ -113,7 +113,7 @@ body>.container>.box-top {
     text-align: center;
 }
 
-.container>.box-top>.box-left-card-weather>.card-right>.card-temp {
+.container>.box-top>.box-left-card-weather>.box-lcard-right>.card-temp {
     font-family: Roboto;
     font-size: 64px;
     font-weight: 700;
