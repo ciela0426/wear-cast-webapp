@@ -73,7 +73,7 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
                 let minTemperature = Infinity;
                 let maxTemperature = -Infinity;
 
-                for (let i = 0; i < 8; i++) {
+                for (let i = 0; i <= 7; i++) {
                     const currentMinTemperature = weatherData.list[i].main.temp_min;
                     const currentMaxTemperature = weatherData.list[i].main.temp_max;
 
