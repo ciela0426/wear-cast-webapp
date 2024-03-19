@@ -45,8 +45,6 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
                 제공되는 최고,최저 온도가 우리가 원하는 값이 아닌 것 같아 보임
                 3시간내의 최고,최저가 아닌 그 지역에서(넓은지역) 온도인 거 같아서 확인 필요
                 */
-                // const maxTemperature = weatherData.list[2].main.temp_max;    
-                // const minTemperature = weatherData.list[2].main.temp_min;
                 const sunriseTime = new Date(weatherData.city.sunrise * 1000).toLocaleTimeString(); //일출시간
                 const sunsetTime = new Date(weatherData.city.sunset * 1000).toLocaleTimeString();   //일몰시간
                 const currentTime = new Date().toLocaleTimeString();    //현재시각
@@ -71,6 +69,28 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
                     forecastElement.innerHTML += `날씨: ${weatherDescription}, 온도: ${temperature} 시간: ${time}<br>`;
 
                 }
+                
+                let minTemperature = Infinity;
+                let maxTemperature = -Infinity;
+
+                for (let i = 0; i < 8; i++) {
+                    const currentMinTemperature = weatherData.list[i].main.temp_min;
+                    const currentMaxTemperature = weatherData.list[i].main.temp_max;
+
+                    // 현재 최저 기온이 minTemperature보다 작으면 업데이트
+                    if (currentMinTemperature < minTemperature) {
+                        minTemperature = currentMinTemperature;
+                    }
+
+                    // 현재 최고 기온이 maxTemperature보다 크면 업데이트
+                    if (currentMaxTemperature > maxTemperature) {
+                        maxTemperature = currentMaxTemperature;
+                    }
+                }
+
+                const forecastElement = document.getElementById('lowesthighest-temperature');
+                forecastElement.innerHTML = `최고 기온: ${maxTemperature}, 최저 기온: ${minTemperature}<br>`;
+
 
 
                 // 24시간 내에 비가 오는지 여부 판단
@@ -125,7 +145,7 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
     .catch(error => {
         console.error('Error fetching IP info:', error);
     });
-    
+
 
 
 // 현재 날씨의 온도를 기반으로 추천 옷차림을 반환하는 함수
