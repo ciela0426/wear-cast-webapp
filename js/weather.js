@@ -95,7 +95,7 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
 
                 // 24시간 내에 비가 오는지 여부 판단
                 let isRaining = false;
-                for (let i = 0; i < 8; i++) {
+                for (let i = 0; i <= 7; i++) {
                     if (weatherData.list[i].weather[0].main === 'Rain') {
                         isRaining = true;
                         break;
