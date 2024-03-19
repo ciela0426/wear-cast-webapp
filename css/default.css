@@ -126,7 +126,7 @@ body>.container>.box-top {
     position: absolute;
     align-items: center;
     display: flex;
-    width: 1136px;
+    width: 1125px;
     height: 239px;
     top: 394px;
     left: 2px;
@@ -157,7 +157,7 @@ body>.container>.box-top {
 .container>.weather-table>.weather-list {
     display: flex;
     align-items: center;
-    width: 1024px;
+    width: 972px;
     height: 239px;
     border-radius: 32px;
     background-color: rgba(24, 24, 24, 1);
@@ -165,6 +165,9 @@ body>.container>.box-top {
     margin: 8px;
 }
 
+.container>.weather-table>.weather-list::-webkit-scrollbar {
+    display: none;
+}
 
 .container>.weather-table>.weather-list>ul {
     display: flex;
@@ -253,3 +256,9 @@ body>.container>.box-top {
     letter-spacing: 0em;
     text-align: center;
 }
+
+/* tablet */
+@media (max-width: 1024px) {}
+
+/* mobile */
+@media (max-width: 550px) {}
