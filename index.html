@@ -2,169 +2,187 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>날씨 정보</title>
-    <link rel="stylesheet" href="./css/default.css">
-    <link rel="stylesheet" href="./css/default2.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>날씨 정보</title>
+  <link rel="stylesheet" href="./css/default.css">
+  <!-- <link rel="stylesheet" href="./css/default2.css"> -->
 </head>
 
 <body>
-    <div class="container">
-        <div class="box-top">
-            <div class="box-left-info">
-                <div class="box-location">
-                    <div class="icon-location"></div>
-                    <p class="text-location">서울특별시, 대한민국</p>
-                </div>
-                <div class="box-date">
-                    <p class="text-date">3월 17일, 2024 11:39</p>
-                </div>
-            </div>
-            <div class="box-left-card-weather">
-                <div class="img-weather">
-                </div>
-                <div class="card-right">
-                    <p class="card-explain">흐리고 한때 비</p>
-                    <p class="card-temp">13°</p>
-                </div>
-            </div>
+  <div class="container">
+    <!-- 상단 -->
+    <div class="box-top">
+      <!-- 상단 왼쪽 -->
+      <div class="box-left">
+        <div class="box-left-info">
+          <div class="box-location">
+            <div class="icon-location"></div>
+            <p class="text-location">서울특별시, 대한민국</p>
+          </div>
+          <p class="text-date">3월 17일, 2024 11:39</p>
         </div>
-        <div class="weather-table">
-            <div class="arrow-left">
-                <img src="./public/images/left.png" alt="">
-            </div>
-            <div class="weather-list">
-                <ul>
-                    <li>
-                        <div class="weather-element last">
-                            <div class="element-date">
-                                <p class="text-element-day">03.18</p>
-                                <p class="text-element-time">12:00</p>
-                            </div>
-                            <div class="img-element-weather">
-                                <img src="./public/images/small_sun.png" alt="">
-                            </div>
-                            <p class="element-temp">12°</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="weather-element last">
-                            <div class="element-date">
-                                <p class="text-element-day">03.18</p>
-                                <p class="text-element-time">12:00</p>
-                            </div>
-                            <div class="img-element-weather">
-                                <img src="./public/images/small_sun.png" alt="">
-                            </div>
-                            <p class="element-temp">12°</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="weather-element currentRec">
-                            <div class="element-date">
-                                <p class="text-element-day">03.18</p>
-                                <p class="text-element-time">12:00</p>
-                            </div>
-                            <div class="img-element-weather">
-                                <img src="./public/images/small_sun.png" alt="">
-                            </div>
-                            <p class="element-temp">12°</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="weather-element">
-                            <div class="element-date">
-                                <p class="text-element-day">03.18</p>
-                                <p class="text-element-time">12:00</p>
-                            </div>
-                            <div class="img-element-weather">
-                                <img src="./public/images/small_sun.png" alt="">
-                            </div>
-                            <p class="element-temp">12°</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="weather-element">
-                            <div class="element-date">
-                                <p class="text-element-day">03.18</p>
-                                <p class="text-element-time">12:00</p>
-                            </div>
-                            <div class="img-element-weather">
-                                <img src="./public/images/small_sun.png" alt="">
-                            </div>
-                            <p class="element-temp">12°</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="weather-element">
-                            <div class="element-date">
-                                <p class="text-element-day">03.18</p>
-                                <p class="text-element-time">12:00</p>
-                            </div>
-                            <div class="img-element-weather">
-                                <img src="./public/images/small_sun.png" alt="">
-                            </div>
-                            <p class="element-temp">12°</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="weather-element">
-                            <div class="element-date">
-                                <p class="text-element-day">03.18</p>
-                                <p class="text-element-time">12:00</p>
-                            </div>
-                            <div class="img-element-weather">
-                                <img src="./public/images/small_sun.png" alt="">
-                            </div>
-                            <p class="element-temp">12°</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="weather-element">
-                            <div class="element-date">
-                                <p class="text-element-day">03.18</p>
-                                <p class="text-element-time">12:00</p>
-                            </div>
-                            <div class="img-element-weather">
-                                <img src="./public/images/small_sun.png" alt="">
-                            </div>
-                            <p class="element-temp">12°</p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="arrow-right">
-                <img src="./public/images/right.png" alt="">
-            </div>
-            <div class="container">
-              <div class="box-container">
-                <img src="./public/images/image1.png" alt="Image 1">
-              </div>
-              <div class="box">
-                <img src="./public/images/image2.png" alt="Image 2">
-              </div>
-              <div class="box">
-                <img src="./public/images/image3.png" alt="Image 3">
-              </div>
-              <div class="box">
-                <img src="./public/images/image4.png" alt="Image 4">
-              </div>
-              <div class="box">
-                <img src="./public/images/image5.png" alt="Image 5">
-              </div>
-              <div class="box">
-                <img src="./public/images/image6.png" alt="Image 6">
-              </div>
-              <div class="centered-text">
-                <p1>가디건, 자켓, 야상, 스타킹, 청바지, 면바지</p1>
-              </div>
-              <div class="sun-container">
-                
-              </div>
+        <div class="box-left-card-weather">
+          <div class="img-weather"></div>
+          <div class="card-right">
+            <p class="card-explain">흐리고 한때 비</p>
+            <p class="card-temp">13<span>°</span></p>
+          </div>
         </div>
-    </div>
+      </div>
+      <!-- 상단 오른쪽 -->
+      <div class="box-right">
+        <div class="box-detail-weather">
+          <div class="box">
+            <div class="icon"></div>
+            <p>48<span>%</span></p>
+          </div>
+          <div class="box">
+            <div class="icon"></div>
+            <p>48<span>%</span></p>
+          </div>
+          <div class="box">
+            <div class="icon"></div>
+            <p>48<span>%</span></p>
+          </div>
+          <div class="box">
+            <div class="icon"></div>
+            <p>48<span>%</span></p>
+          </div>
+          <div class="box">
+            <div class="icon"></div>
+            <p>48<span>%</span></p>
+          </div>
+          <div class="box">
+            <div class="icon"></div>
+            <p>48<span>%</span></p>
+          </div>
+        </div>
+        <div class="centered-text">
+          <p1>가디건, 자켓, 야상, 스타킹, 청바지, 면바지</p1>
+        </div>
+        <div class="box-sun">
 
+        </div>
+      </div>
+    </div>
+    <div class="weather-table">
+      <div class="arrow-left">
+        <img src="./public/images/left.png" alt="">
+      </div>
+      <div class="weather-list">
+        <ul>
+          <li>
+            <div class="weather-element last">
+              <div class="element-date">
+                <p class="text-element-day">03.18</p>
+                <p class="text-element-time">12:00</p>
+              </div>
+              <div class="img-element-weather">
+                <img src="./public/images/small_sun.png" alt="">
+              </div>
+              <p class="element-temp">12°</p>
+            </div>
+          </li>
+          <li>
+            <div class="weather-element last">
+              <div class="element-date">
+                <p class="text-element-day">03.18</p>
+                <p class="text-element-time">12:00</p>
+              </div>
+              <div class="img-element-weather">
+                <img src="./public/images/small_sun.png" alt="">
+              </div>
+              <p class="element-temp">12°</p>
+            </div>
+          </li>
+          <li>
+            <div class="weather-element currentRec">
+              <div class="element-date">
+                <p class="text-element-day">03.18</p>
+                <p class="text-element-time">12:00</p>
+              </div>
+              <div class="img-element-weather">
+                <img src="./public/images/small_sun.png" alt="">
+              </div>
+              <p class="element-temp">12°</p>
+            </div>
+          </li>
+          <li>
+            <div class="weather-element">
+              <div class="element-date">
+                <p class="text-element-day">03.18</p>
+                <p class="text-element-time">12:00</p>
+              </div>
+              <div class="img-element-weather">
+                <img src="./public/images/small_sun.png" alt="">
+              </div>
+              <p class="element-temp">12°</p>
+            </div>
+          </li>
+          <li>
+            <div class="weather-element">
+              <div class="element-date">
+                <p class="text-element-day">03.18</p>
+                <p class="text-element-time">12:00</p>
+              </div>
+              <div class="img-element-weather">
+                <img src="./public/images/small_sun.png" alt="">
+              </div>
+              <p class="element-temp">12°</p>
+            </div>
+          </li>
+          <li>
+            <div class="weather-element">
+              <div class="element-date">
+                <p class="text-element-day">03.18</p>
+                <p class="text-element-time">12:00</p>
+              </div>
+              <div class="img-element-weather">
+                <img src="./public/images/small_sun.png" alt="">
+              </div>
+              <p class="element-temp">12°</p>
+            </div>
+          </li>
+          <li>
+            <div class="weather-element">
+              <div class="element-date">
+                <p class="text-element-day">03.18</p>
+                <p class="text-element-time">12:00</p>
+              </div>
+              <div class="img-element-weather">
+                <img src="./public/images/small_sun.png" alt="">
+              </div>
+              <p class="element-temp">12°</p>
+            </div>
+          </li>
+          <li>
+            <div class="weather-element">
+              <div class="element-date">
+                <p class="text-element-day">03.18</p>
+                <p class="text-element-time">12:00</p>
+              </div>
+              <div class="img-element-weather">
+                <img src="./public/images/small_sun.png" alt="">
+              </div>
+              <p class="element-temp">12°</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="arrow-right">
+        <img src="./public/images/right.png" alt="">
+      </div>
+    </div>
+  </div>
+  <footer>
+    <h2 class="footer-logo">Wear Cast</h2>
+    <p class="copyright">??</p>
+    <div class="box-sns">
+      <button>Notion</button>
+      <button>Github</button>
+    </div>
+  </footer>
     <!-- <h1>현재 날씨 정보</h1>
 <div id="weather"></div>
 <h1>현재 시각</h1>
