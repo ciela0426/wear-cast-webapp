@@ -120,17 +120,16 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         한번이라도 비가 왔다면 변수에 저장
         추후에 우산 챙기는 기능에 사용가능
         */
-        let isRaining = false;
-        for (let i = 0; i < 8; i++) {
-          if (weatherData.list[i].weather[0].main === 'Rain') {
-            isRaining = true;
-            break;
-          }
-        }
+        // let isRaining = false;
+        // for (let i = 0; i < 8; i++) {
+        //   if (weatherData.list[i].weather[0].main === 'Rain') {
+        //     isRaining = true;
+        //     break;
+        //   }
+        // }
         // // 비 내용 HTML에 출력
         // const rainElement = document.getElementById('rain');    //HTML의 id:rain과 연결
-        // rainElement.innerHTML = `24시간 내에 비가 오는지: ${isRaining ? '비가 옴' : '비가 오지 않음'}`
-
+        // rainElement.innerHTML = `24시간 내에 비가 오는지: ${isRaining ? 'YES' : 'NO'}`
 
         /*
         4번째 기능: 현재 온도 기반 옷차림 추천
@@ -166,8 +165,75 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
           // forecast2Element.innerHTML += `날씨: ${weatherDescription}, 온도: ${temperature} 시간: ${time}<br>`;    //HTML에 출력
         }
 
+        // 온도와 습도에 따라서 "GOOD" 또는 "BAD"를 반환하는 함수
+        function checkCondition(temperature, humidity) {
+
+          // 온도와 습도의 범위 정의
+          const conditions = [
+            { tempRange: [19, 23], humidityRange: [47.5, 52.5] },  // 온도가 19~23이고 습도가 47.5~52.5인 경우
+            { tempRange: [24, 27], humidityRange: [57.5, 62.5] },  // 온도가 24~27이고 습도가 57.5~62.5인 경우
+            { tempRange: [18, 21], humidityRange: [37.5, 42.5] }   // 온도가 18~21이고 습도가 37.5~42.5인 경우
+
+            // 추가적인 조건을 필요에 따라 여기에 추가할 수 있습니다.
+          ];
+
+          // 조건에 맞는지 확인
+          for (const condition of conditions) {
+            const tempRange = condition.tempRange;
+            const humidityRange = condition.humidityRange;
+            if (temperature >= tempRange[0] && temperature <= tempRange[1] &&
+              humidity >= humidityRange[0] && humidity <= humidityRange[1]) {
+              return "GOOD";
+            }
+          }
+
+          // 모든 조건에 해당하지 않으면 "BAD" 반환
+          return "BAD";
+        }
+
+        // 온도와 습도에 따라서 조건 확인 후 결과 표시
+        // const conditionElement = document.getElementById('');
+        // const conditionResult = checkCondition(temperature, humidity);
+        // conditionElement.innerHTML = `현재 상태: ${conditionResult}`; // HTML 요소에 결과 표시
+
 
       })
+
+      // 대기질 상태 받아오는 API
+      const AirPollutionApiUrl = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=a2bef9ef4e8c7cb401ffa5e9cf298192&units=metric&lang=kr`;
+
+      fetch(AirPollutionApiUrl)
+        .then(response => response.json())
+        .then(AirPollutionData => {
+          const airquality = AirPollutionData.list[0].main.aqi;
+          let airqualityText = '';
+      
+          // 대기질 심각 수준에 따른 텍스트 정의
+          switch (airquality) {
+            case 1:
+              airqualityText = '좋음';
+              break;
+            case 2:
+              airqualityText = '보통';
+              break;
+            case 3:
+              airqualityText = '보통';
+              break;
+            case 4:
+              airqualityText = '나쁨';
+              break;
+            case 5:
+              airqualityText = '매우 나쁨';
+              break;
+            default:
+              airqualityText = '알 수 없음';
+              break;
+          }
+      
+          const AirPollutionElement = document.getElementById('Air-Pollution');
+          AirPollutionElement.innerHTML = `${airqualityText}`;
+        })
+
       .catch(error => {
         console.error('Error fetching weather info:', error);
       });
