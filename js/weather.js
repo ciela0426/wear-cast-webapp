@@ -115,8 +115,27 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
 
 
 
+         /*
+        3번째 기능: 현재 강수량 정보 출력
+        현재 날씨에서 비가 올 시 API내에서 강수량 정보를 얻을 수 있는데 비가 안 올 시 제공해주지 않음
+        비가 올 시 강수량 정보를 얻어와서 출력하고 비가 안 올 시 '0'을 출력한다.
+        */
+        function displayWeatherInfo() {
+          // 'Rain'인 경우 'weatherData.list[2].rain.1h'의 정보 출력, 그렇지 않은 경우 '0' 출력
+          if (weatherData.list[2].weather[0].main === 'Rain') {
+            document.getElementById('WeatherInfo').textContent = weatherData.list[2].rain['1h'] + "mm";
+          } else {
+            document.getElementById('WeatherInfo').textContent = "0mm";
+          }
+        }
+
+        // 함수 호출
+        displayWeatherInfo();
+
+
+
         /*
-        3번째 기능 : 24시간 내에 비가 오는 지 확인
+        4번째 기능 : 24시간 내에 비가 오는 지 확인
         한번이라도 비가 왔다면 변수에 저장
         추후에 우산 챙기는 기능에 사용가능
         */
@@ -132,7 +151,7 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         // rainElement.innerHTML = `24시간 내에 비가 오는지: ${isRaining ? 'YES' : 'NO'}`
 
         /*
-        4번째 기능: 현재 온도 기반 옷차림 추천
+        5번째 기능: 현재 온도 기반 옷차림 추천
         맨 아래에 suggestedOutfit 함수 구현 후 호출
         */
         // const outfitElement = document.getElementById('outfit');    //HTML의 id:outfit와 연결
@@ -140,7 +159,7 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         // outfitElement.innerHTML = `추천 옷차림: ${suggestedOutfit}`;    //HTML에 출력
 
         /*
-        5번째 기능: 내일의 정보 출력
+        6번째 기능: 내일의 정보 출력
         구현 : 내일의 정보를 얻어오기 위해 현재 날짜를 가져오고 +1 정보 추출(필터링)
         추가적으로 내일 모래도 가능함
         */
@@ -165,7 +184,10 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
           // forecast2Element.innerHTML += `날씨: ${weatherDescription}, 온도: ${temperature} 시간: ${time}<br>`;    //HTML에 출력
         }
 
-        // 온도와 습도에 따라서 "GOOD" 또는 "BAD"를 반환하는 함수
+        /*
+        7번째 기능: 온도별 권장 습도에 따라 습도 상태 출력
+        구현 : 온도별 권장 습도 +-5% 내에 있을 시 'GOOD' 출력, 권장습도 범위를 벗어날 시 'BAD' 출력
+        */
         function checkCondition(temperature, humidity) {
 
           // 온도와 습도의 범위 정의
@@ -199,40 +221,45 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
 
       })
 
-      // 대기질 상태 받아오는 API
-      const AirPollutionApiUrl = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=a2bef9ef4e8c7cb401ffa5e9cf298192&units=metric&lang=kr`;
+    /*
+    8번째 기능: 대기질 현황을 받아와 대기질 상태를 출력
+    구현 : 대기질을 받아올 수 있는 API에서 실시간 대기질 현황을 받아와 각 단계별 대기질 상태 대입 후 출력
+    */
+    
+    // 대기질 상태 받아오는 API
+    const AirPollutionApiUrl = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=a2bef9ef4e8c7cb401ffa5e9cf298192&units=metric&lang=kr`;
 
-      fetch(AirPollutionApiUrl)
-        .then(response => response.json())
-        .then(AirPollutionData => {
-          const airquality = AirPollutionData.list[0].main.aqi;
-          let airqualityText = '';
-      
-          // 대기질 심각 수준에 따른 텍스트 정의
-          switch (airquality) {
-            case 1:
-              airqualityText = '좋음';
-              break;
-            case 2:
-              airqualityText = '보통';
-              break;
-            case 3:
-              airqualityText = '보통';
-              break;
-            case 4:
-              airqualityText = '나쁨';
-              break;
-            case 5:
-              airqualityText = '매우 나쁨';
-              break;
-            default:
-              airqualityText = '알 수 없음';
-              break;
-          }
-      
-          const AirPollutionElement = document.getElementById('Air-Pollution');
-          AirPollutionElement.innerHTML = `${airqualityText}`;
-        })
+    fetch(AirPollutionApiUrl)
+      .then(response => response.json())
+      .then(AirPollutionData => {
+        const airquality = AirPollutionData.list[0].main.aqi;
+        let airqualityText = '';
+
+        // 대기질 심각 수준에 따른 텍스트 정의
+        switch (airquality) {
+          case 1:
+            airqualityText = '좋음';
+            break;
+          case 2:
+            airqualityText = '보통';
+            break;
+          case 3:
+            airqualityText = '보통';
+            break;
+          case 4:
+            airqualityText = '나쁨';
+            break;
+          case 5:
+            airqualityText = '매우 나쁨';
+            break;
+          default:
+            airqualityText = '알 수 없음';
+            break;
+        }
+
+        const AirPollutionElement = document.getElementById('Air-Pollution');
+        AirPollutionElement.innerHTML = `${airqualityText}`;
+      })
 
       .catch(error => {
         console.error('Error fetching weather info:', error);
@@ -245,7 +272,8 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
 
 
 /*
-1번째 함수: 현재 온도로 옷차림 추천
+9번째 기능: 온도별 옷차림 추천
+구현: 온도 데이터를 받아와서 각 온도별 옷차림을 추천해줌
 */
 function suggestOutfit(temperature) {
   let outfit = '';
