@@ -56,10 +56,14 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         const timeElement = document.getElementById('current-time');
         const todayWeatherDescElement = document.getElementById('todayWeatherDesc');
         const todayWeatherTempElement = document.getElementById('todayWeatherTemp');
+        const todayHumidElement = document.getElementById('todayHumid');
+        const currentWindElement = document.getElementById('windspeed');
 
         timeElement.innerHTML = formattedDate;
         todayWeatherDescElement.innerHTML = `${weatherDescription}`;
         todayWeatherTempElement.innerHTML = `${temperature}` + "<span>°</span>";
+        todayHumidElement.innerHTML = `${humidity}`+"<span>%</span>";
+        currentWindElement.innerHTML = `${windSpeed}`;
 
         /*
         2번째 기능: 24시간 날씨 출력
@@ -174,21 +178,20 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
 
 
 
-        /*
-        4번째 기능 : 24시간 내에 비가 오는 지 확인
-        한번이라도 비가 왔다면 변수에 저장
-        추후에 우산 챙기는 기능에 사용가능
-        */
-        // let isRaining = false;
-        // for (let i = 0; i < 8; i++) {
-        //   if (weatherData.list[i].weather[0].main === 'Rain') {
-        //     isRaining = true;
-        //     break;
-        //   }
-        // }
-        // // 비 내용 HTML에 출력
-        // const rainElement = document.getElementById('rain');    //HTML의 id:rain과 연결
-        // rainElement.innerHTML = `24시간 내에 비가 오는지: ${isRaining ? 'YES' : 'NO'}`
+        // 4번째 기능 : 24시간 내에 비가 오는 지 확인
+        // 한번이라도 비가 왔다면 변수에 저장
+        // 추후에 우산 챙기는 기능에 사용가능
+   
+        let isRaining = false;
+        for (let i = 0; i < 8; i++) {
+          if (weatherData.list[i].weather[0].main === 'Rain') {
+            isRaining = true;
+            break;
+          }
+        }
+        // 비 내용 HTML에 출력
+        const rainElement = document.getElementById('rain');    //HTML의 id:rain과 연결
+        rainElement.innerHTML = `${isRaining ? 'YES' : 'NO'}`
 
         /*
         5번째 기능: 현재 온도 기반 옷차림 추천
@@ -253,10 +256,11 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
           return "BAD";
         }
 
+        
         // 온도와 습도에 따라서 조건 확인 후 결과 표시
-        // const conditionElement = document.getElementById('');
-        // const conditionResult = checkCondition(temperature, humidity);
-        // conditionElement.innerHTML = `현재 상태: ${conditionResult}`; // HTML 요소에 결과 표시
+        const conditionElement = document.getElementById('HumidityStatus');
+        const conditionResult = checkCondition(temperature, humidity);
+        conditionElement.innerHTML = `${conditionResult}`; // HTML 요소에 결과 표시
 
 
       })
