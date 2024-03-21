@@ -65,9 +65,33 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         timeElement.innerHTML = formattedDate;
         todayWeatherDescElement.innerHTML = `${weatherDescription}`;
         todayWeatherTempElement.innerHTML = `${temperature}` + "<span>°</span>";
-        todayHumidElement.innerHTML = `${humidity}`+"<span>%</span>";
-        currentWindElement.innerHTML = `${windSpeed}`;
+        todayHumidElement.innerHTML = `${humidity}` + "<span>%</span>";
+        currentWindElement.innerHTML = `${windSpeed}` + "<span>m/s</span>";
         weatherIconElement.src = iconUrl;
+
+        // sunset-bar-now 요소 선택
+        const sunsetBarNow = document.getElementById('sunset-bar-now');
+
+        // 현재 시간을 얻기
+        var now = new Date();
+
+        // 현재 시간을 시간, 분, 초 단위로 변환
+        var hours = now.getHours();
+        var minutes = now.getMinutes();
+        var seconds = now.getSeconds();
+
+        // 하루의 총 초 수
+        var totalSecondsInDay = 24 * 60 * 60;
+
+        // 현재까지의 총 초 수 계산
+        var totalSecondsPassed = (hours * 60 * 60) + (minutes * 60) + seconds;
+
+        // 백분율 계산
+        var percentagePassed = (totalSecondsPassed / totalSecondsInDay) * 100;
+
+        // sunset-bar-now 요소의 너비 설정
+        sunsetBarNow.style.width = percentagePassed + '%';
+
 
         /*
         2번째 기능: 24시간 날씨 출력
@@ -90,10 +114,10 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
           const weatherIconCode = weatherData.list[i].weather[0].icon;
           // 날씨 정보 객체 생성 및 배열에 추가
           const weatherInfo = {
-            day: time.substr(5, 2) + "." + time.substr(8, 2),
-            hour: time.substr(11, 5),
+            day: time.substr(5, 2) + "." + time.substr(8, 2), //날짜만 표시(ex:03.15)
+            hour: time.substr(11, 5), //시간만 표시(ex:18:00)
             temperature: temperature,
-            weatherIconCode: weatherIconCode,
+            weatherIconCode: weatherIconCode, //날씨 코드
 
           };
           weatherDataArray.push(weatherInfo);
@@ -106,7 +130,7 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
           // 날씨 요소 생성
           const weatherElement = document.createElement('div');
           weatherElement.classList.add('weather-element');
-          
+
           // 요소 내용 설정
           weatherElement.innerHTML = `
     <div class="element-date">
@@ -173,9 +197,9 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         function displayWeatherInfo() {
           // 'Rain'인 경우 'weatherData.list[2].rain.1h'의 정보 출력, 그렇지 않은 경우 '0' 출력
           if (weatherData.list[2].weather[0].main === 'Rain') {
-            document.getElementById('WeatherInfo').textContent = weatherData.list[2].rain['1h'] + "mm";
+            document.getElementById('WeatherInfo').innerHTML = `${rainAmount}<span>mm</span>`;
           } else {
-            document.getElementById('WeatherInfo').textContent = "0mm";
+            document.getElementById('WeatherInfo').innerHTML = "0<span>mm</span>";
           }
         }
 
@@ -187,7 +211,7 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         // 4번째 기능 : 24시간 내에 비가 오는 지 확인
         // 한번이라도 비가 왔다면 변수에 저장
         // 추후에 우산 챙기는 기능에 사용가능
-   
+
         let isRaining = false;
         for (let i = 0; i < 8; i++) {
           if (weatherData.list[i].weather[0].main === 'Rain') {
@@ -262,7 +286,7 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
           return "BAD";
         }
 
-        
+
         // 온도와 습도에 따라서 조건 확인 후 결과 표시
         const conditionElement = document.getElementById('HumidityStatus');
         const conditionResult = checkCondition(temperature, humidity);
