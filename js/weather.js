@@ -108,52 +108,58 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         // display24WeatherData(weatherData);
 
         // //내일 날씨 출력 함수 호출
-         displayTomorrowWeather(weatherData);
+        // displayTomorrowWeather(weatherData);
 
         // //내일 모래 날씨 출력 함수 호출
-        // display3Weather(weatherData);
+        //display3Weather(weatherData);
 
-        // let currentDataIndex = 0; // 현재 표시 중인 데이터 인덱스 (0: 24시간 데이터, 1: 내일 데이터, 2: 내일 모레 데이터)
+        let currentDataIndex = 0; // 현재 표시 중인 데이터 인덱스 (0: 24시간 데이터, 1: 내일 데이터, 2: 내일 모레 데이터)
+        displayData();
 
-        // // 좌측 화살표 클릭 시 이벤트 처리
-        // document.getElementById('arrowLeft').addEventListener('click', function() {
-        //   showPreviousData();
-        // });
-        
-        // // 우측 화살표 클릭 시 이벤트 처리
-        // document.getElementById('arrowRight').addEventListener('click', function() {
-        //   showNextData();
-        // });
+        // 좌측 화살표 클릭 시 이벤트 처리
+        document.getElementById('arrowLeft').addEventListener('click', function () {
+          showPreviousData();
+        });
 
-        // function showPreviousData() {
-        //   currentDataIndex--;
-        //   if (currentDataIndex < 0) {
-        //     currentDataIndex = 2; // 최초로 넘어갔을 때는 내일 모레 데이터로 설정
-        //   }
-        //   displayData();
-        // }
+        // 우측 화살표 클릭 시 이벤트 처리
+        document.getElementById('arrowRight').addEventListener('click', function () {
+          showNextData();
+        });
 
-        // function showNextData() {
-        //   currentDataIndex++;
-        //   if (currentDataIndex > 2) {
-        //     currentDataIndex = 0; // 마지막 데이터에서 넘어갔을 때는 다시 24시간 데이터로 설정
-        //   }
-        //   displayData();
-        // }
+        function showPreviousData() {
+          currentDataIndex--;
+          if (currentDataIndex < 0) {
+            currentDataIndex = 2; // 최초로 넘어갔을 때는 내일 모레 데이터로 설정
+          }
+          displayData();
+        }
 
-        // // 데이터 표시 함수
-        // function displayData() {
-        //   if (currentDataIndex === 0) {
-        //     // 24시간 데이터 표시
-        //     display24WeatherData(weatherData);
-        //   } else if (currentDataIndex === 1) {
-        //     // 내일 데이터 표시
-        //     displayTomorrowWeather(weatherData);
-        //   } else if (currentDataIndex === 2) {
-        //     // 내일 모레 데이터 표시
-        //     display3Weather(weatherData);
-        //   }
-        // }
+        function showNextData() {
+          currentDataIndex++;
+          if (currentDataIndex > 2) {
+            currentDataIndex = 0; // 마지막 데이터에서 넘어갔을 때는 다시 24시간 데이터로 설정
+          }
+          displayData();
+        }
+
+        // 데이터 표시 함수
+        function displayData() {
+          const weatherListElement = document.querySelector('.weather-list');
+
+          // 이전에 표시된 데이터를 지우기
+          weatherListElement.innerHTML = '';
+
+          if (currentDataIndex === 0) {
+            // 24시간 데이터 표시
+            display24WeatherData(weatherData);
+          } else if (currentDataIndex === 1) {
+            // 내일 데이터 표시
+            displayTomorrowWeather(weatherData);
+          } else if (currentDataIndex === 2) {
+            // 내일 모레 데이터 표시
+            display3Weather(weatherData);
+          }
+        }
 
         //       // 날씨 정보 배열 초기화
         //       const weatherDataArray = [];
@@ -424,7 +430,7 @@ function suggestOutfit(temperature) {
   return outfit;
 }
 
-//2번째 함수
+//2번째 함수(24시)
 function display24WeatherData(weatherData) {
   // 날씨 정보 배열 초기화
   const weatherDataArray = [];
@@ -467,7 +473,7 @@ function display24WeatherData(weatherData) {
   });
 }
 
-//3번째 기능
+//3번째 기능(내일)
 function displayTomorrowWeather(weatherData) {
   const currentDate = new Date();
 
@@ -511,7 +517,7 @@ function displayTomorrowWeather(weatherData) {
   });
 }
 
-//4번째 기능
+//4번째 기능(내일모레)
 function display3Weather(weatherData) {
   const currentDate = new Date();
 
