@@ -286,9 +286,6 @@ body>.container>.box-top {
   width: 316px;
   border: 10px;
 }
-
-
-
 /* 24시간 날씨 테이블 */
 .container>.weather-table {
   position: relative;
