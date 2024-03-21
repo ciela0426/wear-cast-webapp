@@ -3,7 +3,7 @@
 <br/>
 <br/>
 
-# Notion
+# 📄 Notion
 - [Team Notion](https://www.notion.so/Wear-Cast-d5b534b1b84f4246bfaebd0735071fdd?pvs=4)
 <br/>
 
