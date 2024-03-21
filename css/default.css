@@ -22,6 +22,11 @@ body>.container {
   padding-right: 56px;
   padding-left: 56px;
   margin: auto;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
 }
 
 
@@ -38,6 +43,7 @@ body>.container>.box-top {
 /* 상단 왼쪽 */
 .container>.box-top>.box-left {
   flex: 1;
+  width: 100%;
 }
 
 .container>.box-top>.box-left>.box-left-info {
@@ -67,13 +73,16 @@ body>.container>.box-top {
 .container>.box-top>.box-left>.box-left-info>.box-location>.text-location {
   font-size: 16px;
   font-weight: 400;
+  line-height: 22.4px;
   color: rgba(170, 170, 170, 1);
 }
 
 .container>.box-top>.box-left>.box-left-info>.text-date {
   font-size: 16px;
   font-weight: 300;
+  line-height: 22.4px;
   color: rgba(170, 170, 170, 1);
+  padding: 4px;
 }
 
 .container>.box-top>.box-left>.box-left-card-weather {
@@ -95,7 +104,7 @@ body>.container>.box-top {
 .container>.box-top>.box-left>.box-left-card-weather>.img-weather {
   width: 300px;
   height: 300px;
-  /* background: url(../public/images/${weatherCode}.png) no-repeat 50% 50%; */
+  background: url(../public/images/sun_rain.png) no-repeat 50% 50%;
   background-size: contain;
 }
 
@@ -110,40 +119,44 @@ body>.container>.box-top {
 .container>.box-top>.box-left>.box-left-card-weather>.card-right>.card-explain {
   font-size: 20px;
   font-weight: 300;
+  line-height: 22px;
+  text-align: center;
 }
 
 .container>.box-top>.box-left>.box-left-card-weather>.card-right>.card-temp {
   font-family: "Designer";
   font-size: 72px;
+  font-weight: 400;
+  line-height: 79.2px;
+  text-align: center;
 }
 
 .container>.box-top>.box-left>.box-left-card-weather>.card-right>.card-temp>span {
   font-family: "Designer";
   font-size: 32px;
+  font-weight: 400;
+  line-height: 25.2px;
+  text-align: center;
 }
 
 /* 상단 오른쪽 */
 .container>.box-top>.box-right {
   flex: 1;
-}
-
-/* 상단 오른쪽 */
-.container>.box-top>.box-right {
   width: 100%;
-  flex: 1;
+  height: 100%;
   display: flex;
-  align-items: flex-end;
-  border-radius: 32px;
-  position: relative;
   flex-flow: column;
   align-items: center;
-  justify-items: center;
-  
+  justify-content: flex-end;
+
+  /* position: relative; */
+  gap: 16px;
 }
 
 .container>.box-top>.box-right>.box-detail-weather {
   display: grid;
   width: 100%;
+  gap: 4px;
   border-radius: 32px;
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr;
@@ -185,34 +198,46 @@ body>.container>.box-top {
 }
 
 .container>.box-top>.box-right>.box-detail-weather>.box:nth-of-type(3)>.icon {
-  background: url(../public/images/umbrella-g.png) no-repeat 50% 50%;
+  background: url(../public/images/rain.png) no-repeat 50% 50%;
   background-size: contain;
 }
 
 .container>.box-top>.box-right>.box-detail-weather>.box:nth-of-type(4)>.icon {
-  background: url(../public/images/umbrella-b.png) no-repeat 50% 50%;
+  background: url(../public/images/humidity-b.png) no-repeat 50% 50%;
   background-size: contain;
 }
 
 .container>.box-top>.box-right>.box-detail-weather>.box:nth-of-type(5)>.icon {
   background: url(../public/images/mask.png) no-repeat 50% 50%;
   background-size: contain;
-  /* width: 36px;
-  height: 36px; */
 }
 
 .container>.box-top>.box-right>.box-detail-weather>.box:nth-of-type(6)>.icon {
-  background: url(../public/images/humidity-b.png) no-repeat 50% 50%;
+  background: url(../public/images/umbrella-b.png) no-repeat 50% 50%;
   background-size: contain;
-  /* width: 34px;
-  height: 34px; */
 }
 
 .container>.box-top>.box-right>.box-detail-weather>.box>p {
   font-size: 32px;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 35.2px;
   text-align: center;
+  color: rgba(170, 170, 170, 1);
+}
+
+.container>.box-top>.box-right>.box-detail-weather>.box:nth-of-type(4)>p {
+  font-size: 24px;
+  line-height: 26.4px;
+}
+
+.container>.box-top>.box-right>.box-detail-weather>.box:nth-of-type(5)>p {
+  font-size: 24px;
+  line-height: 26.4px;
+}
+
+.container>.box-top>.box-right>.box-detail-weather>.box:nth-of-type(6)>p {
+  font-size: 24px;
+  line-height: 26.4px;
 }
 
 .container>.box-top>.box-right>.box-detail-weather>.box>p>span {
@@ -220,6 +245,7 @@ body>.container>.box-top {
   font-weight: 300;
   line-height: 13.2px;
   text-align: center;
+  color: rgba(170, 170, 170, 1);
 }
 
 .container>.box-top>.box-right>.centered-text {
@@ -267,34 +293,27 @@ body>.container>.box-top {
   font-weight: 300;
   font-size: 16px;
   line-height: 22.4px;
+  color: rgba(170, 170, 170, 1);
 }
+
 .container>.box-top>.box-right>.box-sun>.sunset-time>.sunup-icon {
   width: 24px;
   height: 24px;
-  background: url(../public/images/sunup.png) no-repeat 50% 50%;
+  background: url(../public/images/sunrise.png) no-repeat 50% 50%;
   background-size: contain;
 }
 
 .container>.box-top>.box-right>.box-sun>.sunset-time>.sundown-icon {
   width: 24px;
   height: 24px;
-  background: url(../public/images/sundown.png) no-repeat 50% 50%;
+  background: url(../public/images/sunset.png) no-repeat 50% 50%;
   background-size: contain;
 }
 
-.box-top > .box-right > .box-sun > .sunset-bar {
-  width: 100%;
-  height: 10px;
-  border-radius: 5px;
-  background: #1e1e1e;
+.container>.box-top>.box-right>.box-sun>.sunset-bar>progress {
+  width: 316px;
+  border: 10px;
 }
-.box-top > .box-right > .box-sun > .sunset-bar > .sunset-bar-now {
-  height: 10px;
-  border-radius: 5px;
-  background: linear-gradient(0.25turn, #0befa1, #5b82fd);
-}
-
-
 
 /* 24시간 날씨 테이블 */
 .container>.weather-table {
@@ -338,6 +357,7 @@ body>.container>.box-top {
   margin-top: 45px;
   margin-bottom: 45px;
   border-right: 1px solid rgba(170, 170, 170, 0.1);
+  gap: 2px;
 }
 
 .container>.weather-table>.weather-list>.weather-element:last-child {
@@ -389,7 +409,7 @@ body>.container>.box-top {
   justify-content: space-around;
   width: 24px;
   height: 24px;
-  /* background: url(../public/images/${weatherCode}.png) no-repeat 50% 50%; */
+  background: url(../public/images/small_sun.png) no-repeat 50% 50%;
   background-size: contain;
 }
 
@@ -438,7 +458,22 @@ footer {
   flex-flow: row;
   align-items: center;
   justify-content: space-between;
-  width: 1440px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 48px;
+  padding: 12px;
+}
+
+footer>.footer-logo {
+  color: rgba(170, 170, 170, 1);
+  font-size: 14px;
+  font-weight: 300;
+}
+
+footer>.copyright {
+  color: rgba(170, 170, 170, 1);
+  font-size: 14px;
+  font-weight: 400;
 }
 
 footer>.box-sns {
@@ -469,49 +504,156 @@ footer>.box-sns>.Github {
 
 /* tablet */
 @media (max-width: 1024px) {
-  /* html {
-        width: 100%;
-        height: 100%;
-    }
 
-    body>.container {
-        box-sizing: border-box;
-        width: 602px;
-        padding-right: 56px;
-        padding-left: 56px;
-        margin: auto;
-    }
+  /* container */
+  body>.container {
+    width: 602px;
+    padding-right: 48px;
+    padding-left: 48px;
+  }
 
-    body>.container>.box-top {
-        flex-flow: column;
-        gap: 12px;
-    }
+  /* 상단 */
+  body>.container>.box-top {
+    flex-flow: column;
+  }
 
-    body>.container>.weather-table>.weather-list {
-        width: 100%;
-    }
+  /* 24시간 날씨 테이블 */
+  .container>.weather-table>.weather-list {
+    justify-content: left;
+  }
 
-    body>.container>.weather-table>.weather-list>.weather-element {
-        flex: none;
-        width: 120px;
-        height: 150px;
-    }
+  /* 시간별 날씨 정보 -> 각각 요소 */
+  .container>.weather-table>.weather-list>.weather-element {
+    flex: none;
+    width: 120px;
+    height: 150px;
+  }
 
-    .container>.weather-table>.weather-list>.weather-element.last::after {
-        content: '';
-        width: 99%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        background-color: rgba(0, 0, 0, 0.3);
-        z-index: 1;
-    } 
+  /* 날씨테이블 화살표 */
+  .container>.weather-table>.arrow {
+    width: 602px;
+  }
 
-    .container>.weather-table>.arrow {
-        width: 602px;   
-    }*/
+  /* footer */
+  footer {
+    width: 1024px;
+  }
 }
 
 /* mobile */
-@media (max-width: 550px) {}
+@media (max-width: 550px) {
+
+  /* container */
+  body>.container {
+    width: 390px;
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  /* 상단 */
+  body>.container>.box-top {
+    flex-flow: column;
+  }
+
+  .container>.box-top>.box-left>.box-left-card-weather {
+    z-index: 1;
+    position: relative;
+    flex-flow: column;
+    padding: 24px 0px;
+  }
+
+  .container>.box-top>.box-left>.box-left-card-weather>.img-weather {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    top: 44px;
+  }
+
+  .container>.box-top>.box-left>.box-left-card-weather>.card-right {
+    align-items: center;
+  }
+
+  /* 상단 오른쪽 */
+  .container>.box-top>.box-right {
+    gap: 12px;
+    /* position relative는 position relative가 되어있는 자신으로부터 움직이겠다는 것 */
+    /* position absolute는 position relative가 되어있는 부모요소로부터 움직이겠다는 것 */
+    position: relative;
+    top: -36px;
+  }
+
+  .container>.box-top>.box-right>.box-detail-weather {
+    padding: 24px 0px 12px 0px;
+  }
+
+  .container>.box-top>.box-right>.box-detail-weather>.box>p {
+    font-size: 24px;
+    line-height: 26.4px;
+  }
+
+  /* 24시간 날씨 테이블 */
+  .container>.weather-table {
+    width: 390px;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0);
+    position: relative;
+    top: -36px;
+  }
+
+  .container>.weather-table>.weather-list {
+    width: 336px;
+    background-color: rgba(24, 24, 24, 1);
+    justify-content: left;
+    border-radius: 32px;
+  }
+
+  /* 시간별 날씨 정보 -> 각각 요소 */
+  .container>.weather-table>.weather-list>.weather-element {
+    margin: 0px;
+    flex: none;
+    width: 112px;
+    height: 150px;
+  }
+
+  .container>.weather-table>.weather-list>.weather-element:nth-of-type(1) {
+    display: none;
+  }
+
+  .container>.weather-table>.weather-list>.weather-element.current-rec::after {
+    box-sizing: border-box;
+    height: 150px;
+  }
+
+  .container>.weather-table>.arrow {
+    width: 390px;
+  }
+
+  .container>.weather-table>.arrow>.arrow-left {
+    width: 24px;
+    height: 24px;
+  }
+
+  .container>.weather-table>.arrow>.arrow-right {
+    width: 24px;
+    height: 24px;
+  }
+
+  footer {
+    flex-flow: column;
+    width: 390px;
+    padding: 12px 10px 24px 10px;
+    gap: 8px;
+    justify-content: flex-start;
+    align-items: start;
+  }
+
+  footer>.footer-logo {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  footer>.copyright {
+    font-size: 12px;
+    font-weight: 400;
+  }
+}
