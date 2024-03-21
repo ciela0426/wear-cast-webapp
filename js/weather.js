@@ -104,46 +104,97 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         // let max = weatherData.list[0].main.temp_max; // 최고 온도 초기화
         // let min = weatherData.list[0].main.temp_min; // 최저 온도 초기화
 
-        // 날씨 정보 배열 초기화
-        const weatherDataArray = [];
+        // //24시간 날씨 출력 함수 호출
+        // display24WeatherData(weatherData);
 
-        // 받아온 날씨 데이터를 배열에 입력
-        for (let i = 0; i <= 7; i++) {
-          const time = weatherData.list[i].dt_txt;
-          const temperature = weatherData.list[i].main.temp.toFixed(1);
-          const weatherIconCode = weatherData.list[i].weather[0].icon;
-          // 날씨 정보 객체 생성 및 배열에 추가
-          const weatherInfo = {
-            day: time.substr(5, 2) + "." + time.substr(8, 2), //날짜만 표시(ex:03.15)
-            hour: time.substr(11, 5), //시간만 표시(ex:18:00)
-            temperature: temperature,
-            weatherIconCode: weatherIconCode, //날씨 코드
+        // //내일 날씨 출력 함수 호출
+         displayTomorrowWeather(weatherData);
 
-          };
-          weatherDataArray.push(weatherInfo);
-        }
-        // 날씨 정보를 표시할 요소를 가져옴
-        const weatherListElement = document.querySelector('.weather-list');
+        // //내일 모래 날씨 출력 함수 호출
+        // display3Weather(weatherData);
 
-        // 날씨 정보 배열을 반복하여 요소 생성
-        weatherDataArray.forEach(data => {
-          // 날씨 요소 생성
-          const weatherElement = document.createElement('div');
-          weatherElement.classList.add('weather-element');
+        // let currentDataIndex = 0; // 현재 표시 중인 데이터 인덱스 (0: 24시간 데이터, 1: 내일 데이터, 2: 내일 모레 데이터)
 
-          // 요소 내용 설정
-          weatherElement.innerHTML = `
-    <div class="element-date">
-      <p class="text-element-day">${data.day}</p>
-      <p class="text-element-time">${data.hour}</p>
-    </div>
-    <img class="img-element-weather" src="./public/images/${data.weatherIconCode}.png" alt="Weather Icon">
-    <p class="element-temp">${data.temperature}<span>°</span></p>
-  `;
+        // // 좌측 화살표 클릭 시 이벤트 처리
+        // document.getElementById('arrowLeft').addEventListener('click', function() {
+        //   showPreviousData();
+        // });
+        
+        // // 우측 화살표 클릭 시 이벤트 처리
+        // document.getElementById('arrowRight').addEventListener('click', function() {
+        //   showNextData();
+        // });
 
-          // 생성한 요소를 weatherListElement에 추가
-          weatherListElement.appendChild(weatherElement);
-        });
+        // function showPreviousData() {
+        //   currentDataIndex--;
+        //   if (currentDataIndex < 0) {
+        //     currentDataIndex = 2; // 최초로 넘어갔을 때는 내일 모레 데이터로 설정
+        //   }
+        //   displayData();
+        // }
+
+        // function showNextData() {
+        //   currentDataIndex++;
+        //   if (currentDataIndex > 2) {
+        //     currentDataIndex = 0; // 마지막 데이터에서 넘어갔을 때는 다시 24시간 데이터로 설정
+        //   }
+        //   displayData();
+        // }
+
+        // // 데이터 표시 함수
+        // function displayData() {
+        //   if (currentDataIndex === 0) {
+        //     // 24시간 데이터 표시
+        //     display24WeatherData(weatherData);
+        //   } else if (currentDataIndex === 1) {
+        //     // 내일 데이터 표시
+        //     displayTomorrowWeather(weatherData);
+        //   } else if (currentDataIndex === 2) {
+        //     // 내일 모레 데이터 표시
+        //     display3Weather(weatherData);
+        //   }
+        // }
+
+        //       // 날씨 정보 배열 초기화
+        //       const weatherDataArray = [];
+
+        //       // 받아온 날씨 데이터를 배열에 입력
+        //       for (let i = 0; i <= 7; i++) {
+        //         const time = weatherData.list[i].dt_txt;
+        //         const temperature = weatherData.list[i].main.temp.toFixed(1);
+        //         const weatherIconCode = weatherData.list[i].weather[0].icon;
+        //         // 날씨 정보 객체 생성 및 배열에 추가
+        //         const weatherInfo = {
+        //           day: time.substr(5, 2) + "." + time.substr(8, 2), //날짜만 표시(ex:03.15)
+        //           hour: time.substr(11, 5), //시간만 표시(ex:18:00)
+        //           temperature: temperature,
+        //           weatherIconCode: weatherIconCode, //날씨 코드
+
+        //         };
+        //         weatherDataArray.push(weatherInfo);
+        //       }
+        //       // 날씨 정보를 표시할 요소를 가져옴
+        //       const weatherListElement = document.querySelector('.weather-list');
+
+        //       // 날씨 정보 배열을 반복하여 요소 생성
+        //       weatherDataArray.forEach(data => {
+        //         // 날씨 요소 생성
+        //         const weatherElement = document.createElement('div');
+        //         weatherElement.classList.add('weather-element');
+
+        //         // 요소 내용 설정
+        //         weatherElement.innerHTML = `
+        //   <div class="element-date">
+        //     <p class="text-element-day">${data.day}</p>
+        //     <p class="text-element-time">${data.hour}</p>
+        //   </div>
+        //   <img class="img-element-weather" src="./public/images/${data.weatherIconCode}.png" alt="Weather Icon">
+        //   <p class="element-temp">${data.temperature}<span>°</span></p>
+        // `;
+
+        //         // 생성한 요소를 weatherListElement에 추가
+        //         weatherListElement.appendChild(weatherElement);
+        //       });
 
 
         // const ulElement = document.querySelector('.weather-list ul');
@@ -237,25 +288,25 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         추가적으로 내일 모래도 가능함
         */
 
-        // 내일 계산
-        const tomorrow = new Date(currentDate);
-        tomorrow.setDate(currentDate.getDate() + 1);
+        // // 내일 계산
+        // const tomorrow = new Date(currentDate);
+        // tomorrow.setDate(currentDate.getDate() + 1);
 
-        // 내일 데이터 추출
-        // filter메서드를 사용해 내일에 해당하는 정보만 필터링
-        const tomorrowWeatherData = weatherData.list.filter(item => {
-          const date = new Date(item.dt_txt);
-          return date.getDate() === tomorrow.getDate();
-        });
+        // // 내일 데이터 추출
+        // // filter메서드를 사용해 내일에 해당하는 정보만 필터링
+        // const tomorrowWeatherData = weatherData.list.filter(item => {
+        //   const date = new Date(item.dt_txt);
+        //   return date.getDate() === tomorrow.getDate();
+        // });
 
-        // 내일 데이터 출력
-        for (const item of tomorrowWeatherData) {
-          const weatherDescription = item.weather[0].description; //추출된 정보의 날씨 상태(ex:맑음)
-          const temperature = item.main.temp;
-          const time = item.dt_txt;
-          // const forecast2Element = document.getElementById('forecast2');  //HTML의 id:forecast2와 연결
-          // forecast2Element.innerHTML += `날씨: ${weatherDescription}, 온도: ${temperature} 시간: ${time}<br>`;    //HTML에 출력
-        }
+        // // 내일 데이터 출력
+        // for (const item of tomorrowWeatherData) {
+        //   const weatherDescription = item.weather[0].description; //추출된 정보의 날씨 상태(ex:맑음)
+        //   const temperature = item.main.temp;
+        //   const time = item.dt_txt;
+        //   // const forecast2Element = document.getElementById('forecast2');  //HTML의 id:forecast2와 연결
+        //   // forecast2Element.innerHTML += `날씨: ${weatherDescription}, 온도: ${temperature} 시간: ${time}<br>`;    //HTML에 출력
+        // }
 
         /*
         7번째 기능: 온도별 권장 습도에 따라 습도 상태 출력
@@ -346,7 +397,7 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
 
 
 /*
-9번째 기능: 온도별 옷차림 추천
+1번째 함수: 온도별 옷차림 추천
 구현: 온도 데이터를 받아와서 각 온도별 옷차림을 추천해줌
 */
 function suggestOutfit(temperature) {
@@ -371,4 +422,135 @@ function suggestOutfit(temperature) {
   }
 
   return outfit;
+}
+
+//2번째 함수
+function display24WeatherData(weatherData) {
+  // 날씨 정보 배열 초기화
+  const weatherDataArray = [];
+
+  // 받아온 날씨 데이터를 배열에 입력
+  for (let i = 0; i <= 7; i++) {
+    const time = weatherData.list[i].dt_txt;
+    const temperature = weatherData.list[i].main.temp.toFixed(1);
+    const weatherIconCode = weatherData.list[i].weather[0].icon;
+    // 날씨 정보 객체 생성 및 배열에 추가
+    const weatherInfo = {
+      day: time.substr(5, 2) + "." + time.substr(8, 2), // 날짜만 표시 (ex: 03.15)
+      hour: time.substr(11, 5), // 시간만 표시 (ex: 18:00)
+      temperature: temperature,
+      weatherIconCode: weatherIconCode, // 날씨 코드
+    };
+    weatherDataArray.push(weatherInfo);
+  }
+  // 날씨 정보를 표시할 요소를 가져옴
+  const weatherListElement = document.querySelector('.weather-list');
+
+  // 날씨 정보 배열을 반복하여 요소 생성
+  weatherDataArray.forEach(data => {
+    // 날씨 요소 생성
+    const weatherElement = document.createElement('div');
+    weatherElement.classList.add('weather-element');
+
+    // 요소 내용 설정
+    weatherElement.innerHTML = `
+      <div class="element-date">
+        <p class="text-element-day">${data.day}</p>
+        <p class="text-element-time">${data.hour}</p>
+      </div>
+      <img class="img-element-weather" src="./public/images/${data.weatherIconCode}.png" alt="Weather Icon">
+      <p class="element-temp">${data.temperature}<span>°</span></p>
+    `;
+
+    // 생성한 요소를 weatherListElement에 추가
+    weatherListElement.appendChild(weatherElement);
+  });
+}
+
+//3번째 기능
+function displayTomorrowWeather(weatherData) {
+  const currentDate = new Date();
+
+  // 내일 계산
+  const tomorrow = new Date(currentDate);
+  tomorrow.setDate(currentDate.getDate() + 1);
+
+  // 내일 데이터 추출
+  const tomorrowWeatherData = weatherData.list.filter(item => {
+    const date = new Date(item.dt_txt);
+    return date.getDate() === tomorrow.getDate();
+  });
+
+  // 날씨 정보를 표시할 요소를 가져옴 (출력할 위치에 맞게 수정해야 함)
+  const weatherListElement = document.querySelector('.weather-list');
+
+  // 날씨 정보 배열을 반복하여 요소 생성
+  tomorrowWeatherData.forEach(data => {
+    // 날씨 요소 생성
+    const weatherElement = document.createElement('div');
+    weatherElement.classList.add('weather-element');
+
+    // 요소 내용 설정
+    const time = data.dt_txt;
+    const temperature = data.main.temp.toFixed(1);
+    const weatherIconCode = data.weather[0].icon;
+    const day = time.substr(5, 2) + "." + time.substr(8, 2); // 날짜만 표시 (ex: 03.15)
+    const hour = time.substr(11, 5); // 시간만 표시 (ex: 18:00)
+
+    weatherElement.innerHTML = `
+      <div class="element-date">
+        <p class="text-element-day">${day}</p>
+        <p class="text-element-time">${hour}</p>
+      </div>
+      <img class="img-element-weather" src="./public/images/${weatherIconCode}.png" alt="Weather Icon">
+      <p class="element-temp">${temperature}<span>°</span></p>
+    `;
+
+    // 생성한 요소를 weatherListElement에 추가
+    weatherListElement.appendChild(weatherElement);
+  });
+}
+
+//4번째 기능
+function display3Weather(weatherData) {
+  const currentDate = new Date();
+
+  // 내일 계산
+  const tomorrow = new Date(currentDate);
+  tomorrow.setDate(currentDate.getDate() + 2);
+
+  // 내일 데이터 추출
+  const tomorrowWeatherData = weatherData.list.filter(item => {
+    const date = new Date(item.dt_txt);
+    return date.getDate() === tomorrow.getDate();
+  });
+
+  // 날씨 정보를 표시할 요소를 가져옴 (출력할 위치에 맞게 수정해야 함)
+  const weatherListElement = document.querySelector('.weather-list');
+
+  // 날씨 정보 배열을 반복하여 요소 생성
+  tomorrowWeatherData.forEach(data => {
+    // 날씨 요소 생성
+    const weatherElement = document.createElement('div');
+    weatherElement.classList.add('weather-element');
+
+    // 요소 내용 설정
+    const time = data.dt_txt;
+    const temperature = data.main.temp.toFixed(1);
+    const weatherIconCode = data.weather[0].icon;
+    const day = time.substr(5, 2) + "." + time.substr(8, 2); // 날짜만 표시 (ex: 03.15)
+    const hour = time.substr(11, 5); // 시간만 표시 (ex: 18:00)
+
+    weatherElement.innerHTML = `
+      <div class="element-date">
+        <p class="text-element-day">${day}</p>
+        <p class="text-element-time">${hour}</p>
+      </div>
+      <img class="img-element-weather" src="./public/images/${weatherIconCode}.png" alt="Weather Icon">
+      <p class="element-temp">${temperature}<span>°</span></p>
+    `;
+
+    // 생성한 요소를 weatherListElement에 추가
+    weatherListElement.appendChild(weatherElement);
+  });
 }
