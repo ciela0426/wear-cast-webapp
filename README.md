@@ -1,4 +1,4 @@
-<div align= "center">Wear Cast</div>
+<div align= "center"># Wear Cast</div>
 <div align= "center">오늘의 날씨와 그에 따른 차림새 등을 추천하는 홈페이지</div>
 <br/>
 
