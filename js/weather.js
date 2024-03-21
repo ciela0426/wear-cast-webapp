@@ -58,28 +58,23 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
               일출 시간: ${sunriseTime}, 일몰 시간: ${sunsetTime}<br>
               측정 시각: ${date}`;
 
-
-
-<<<<<<< Updated upstream
         for (let i = 0; i <= 7; i++) {
           const weatherDescription = weatherData.list[i].weather[0].description;
           const temperature = weatherData.list[i].main.temp;
           const time = weatherData.list[i].dt_txt;
-=======
-        /*
-       3번째 기능: 현재 강수량 정보 출력
-       현재 날씨에서 비가 올 시 API내에서 강수량 정보를 얻을 수 있는데 비가 안 올 시 제공해주지 않음
-       비가 올 시 강수량 정보를 얻어와서 출력하고 비가 안 올 시 '0'을 출력한다.
-       */
-        function displayWeatherInfo() {
-          // 'Rain'인 경우 'weatherData.list[2].rain.1h'의 정보 출력, 그렇지 않은 경우 '0' 출력
-          if (weatherData.list[2].weather[0].main === 'Rain') {
-            document.getElementById('WeatherInfo').textContent = weatherData.list[2].rain['1h'] + "mm";
-          } else {
-            document.getElementById('WeatherInfo').textContent = "0mm";
+          /*
+         3번째 기능: 현재 강수량 정보 출력
+         현재 날씨에서 비가 올 시 API내에서 강수량 정보를 얻을 수 있는데 비가 안 올 시 제공해주지 않음
+         비가 올 시 강수량 정보를 얻어와서 출력하고 비가 안 올 시 '0'을 출력한다.
+         */
+          function displayWeatherInfo() {
+            // 'Rain'인 경우 'weatherData.list[2].rain.1h'의 정보 출력, 그렇지 않은 경우 '0' 출력
+            if (weatherData.list[2].weather[0].main === 'Rain') {
+              document.getElementById('WeatherInfo').textContent = weatherData.list[2].rain['1h'] + "mm";
+            } else {
+              document.getElementById('WeatherInfo').textContent = "0mm";
+            }
           }
-        }
->>>>>>> Stashed changes
 
           const forecastElement = document.getElementById('forecast');
           forecastElement.innerHTML += `날씨: ${weatherDescription}, 온도: ${temperature} 시간: ${time}<br>`;
@@ -153,16 +148,6 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         }
 
 
-<<<<<<< Updated upstream
-      })
-      .catch(error => {
-        console.error('Error fetching weather info:', error);
-      });
-  })
-  .catch(error => {
-    console.error('Error fetching IP info:', error);
-  });
-=======
       })
 
     /*
@@ -212,7 +197,6 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
   .catch(error => {
     console.error('Error fetching IP info:', error);
   });
->>>>>>> Stashed changes
 
 
 
