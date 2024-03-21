@@ -39,20 +39,10 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         const maxTemperature = weatherData.list[2].main.temp_max;    //3시간 동안 최고온도
         const minTemperature = weatherData.list[2].main.temp_min;   //3시간 동안 최저온도
         const date = weatherData.list[2].dt_txt;    //측정시각(ex:2024-03-19 09:00:00)
-        const sunriseTimeUTC = new Date(weatherData.city.sunrise * 1000); // UTC 시간으로 일몰 시간을 가져옴
-        const sunriseTimeKST = new Date(sunriseTimeUTC.getTime() - (9 * 60 * 60 * 1000) + (9 * 60 * 60 * 1000)); // UTC 시간에서 9시간을 빼고 다시 9시간을 더하여 한국 시간으로 변환
-        const sunriseHour = sunriseTimeKST.getHours().toString().padStart(2, '0'); // getHours()를 사용하여 한국 시간의 시간을 가져옴
-        const sunriseMinute = sunriseTimeKST.getMinutes().toString().padStart(2, '0'); // getMinutes()를 사용하여 한국 시간의 분을 가져옴
-        const formattedSunriseTime = `${sunriseHour}:${sunriseMinute}`; // 형식화된 일몰 시간을 생성 
-        const sunsetTimeUTC = new Date(weatherData.city.sunset * 1000); // UTC 시간으로 일몰 시간을 가져옴
-        const sunsetTimeKST = new Date(sunsetTimeUTC.getTime() - (9 * 60 * 60 * 1000) + (9 * 60 * 60 * 1000)); // UTC 시간에서 9시간을 빼고 다시 9시간을 더하여 한국 시간으로 변환
-        const sunsetHour = sunsetTimeKST.getHours().toString().padStart(2, '0'); // getHours()를 사용하여 한국 시간의 시간을 가져옴
-        const sunsetMinute = sunsetTimeKST.getMinutes().toString().padStart(2, '0'); // getMinutes()를 사용하여 한국 시간의 분을 가져옴
-        const formattedSunsetTime = `${sunsetHour}:${sunsetMinute}`; // 형식화된 일몰 시간을 생성
+        const sunriseTime = new Date(weatherData.city.sunrise * 1000).toLocaleTimeString(); //일출시간
+        const sunsetTime = new Date(weatherData.city.sunset * 1000).toLocaleTimeString();   //일몰시간
         const currentDate = new Date(); //현재 날짜 얻어옴
         const weatherIconCode = weatherData.list[2].weather[0].icon;
-
-
 
         //현재 시각을 원하는 포맷으로 출력하기 위한 처리
         const month = currentDate.toLocaleString('default', { month: 'long' });
@@ -68,8 +58,6 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         const todayWeatherDescElement = document.getElementById('todayWeatherDesc');
         const todayWeatherTempElement = document.getElementById('todayWeatherTemp');
         const todayHumidElement = document.getElementById('todayHumid');
-        const todaysunriseTimeElement = document.getElementById('sunriseTime');
-        const todaysunsetTimeElement = document.getElementById('sunsetTime');
         const currentWindElement = document.getElementById('windspeed');
         const weatherIconElement = document.getElementById('todayIcon')
         const iconUrl = `./public/images/${weatherIconCode}.png`; // 이미지 파일의 경로
@@ -78,10 +66,32 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         todayWeatherDescElement.innerHTML = `${weatherDescription}`;
         todayWeatherTempElement.innerHTML = `${temperature}` + "<span>°</span>";
         todayHumidElement.innerHTML = `${humidity}` + "<span>%</span>";
-        todaysunriseTimeElement.innerHTML = `${formattedSunriseTime}`;
-        todaysunsetTimeElement.innerHTML = formattedSunsetTime;
-        currentWindElement.innerHTML = `${windSpeed}`;
+        currentWindElement.innerHTML = `${windSpeed}` + "<span>m/s</span>";
         weatherIconElement.src = iconUrl;
+
+        // sunset-bar-now 요소 선택
+        const sunsetBarNow = document.getElementById('sunset-bar-now');
+
+        // 현재 시간을 얻기
+        var now = new Date();
+
+        // 현재 시간을 시간, 분, 초 단위로 변환
+        var hours = now.getHours();
+        var minutes = now.getMinutes();
+        var seconds = now.getSeconds();
+
+        // 하루의 총 초 수
+        var totalSecondsInDay = 24 * 60 * 60;
+
+        // 현재까지의 총 초 수 계산
+        var totalSecondsPassed = (hours * 60 * 60) + (minutes * 60) + seconds;
+
+        // 백분율 계산
+        var percentagePassed = (totalSecondsPassed / totalSecondsInDay) * 100;
+
+        // sunset-bar-now 요소의 너비 설정
+        sunsetBarNow.style.width = percentagePassed + '%';
+
 
         /*
         2번째 기능: 24시간 날씨 출력
@@ -101,11 +111,13 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         for (let i = 0; i <= 7; i++) {
           const time = weatherData.list[i].dt_txt;
           const temperature = weatherData.list[i].main.temp.toFixed(1);
+          const weatherIconCode = weatherData.list[i].weather[0].icon;
           // 날씨 정보 객체 생성 및 배열에 추가
           const weatherInfo = {
-            day: time.substr(5, 2) + "." + time.substr(8, 2),
-            hour: time.substr(11, 5),
+            day: time.substr(5, 2) + "." + time.substr(8, 2), //날짜만 표시(ex:03.15)
+            hour: time.substr(11, 5), //시간만 표시(ex:18:00)
             temperature: temperature,
+            weatherIconCode: weatherIconCode, //날씨 코드
 
           };
           weatherDataArray.push(weatherInfo);
@@ -125,7 +137,7 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
       <p class="text-element-day">${data.day}</p>
       <p class="text-element-time">${data.hour}</p>
     </div>
-    <div class="img-element-weather"></div>
+    <img class="img-element-weather" src="./public/images/${data.weatherIconCode}.png" alt="Weather Icon">
     <p class="element-temp">${data.temperature}<span>°</span></p>
   `;
 
@@ -185,9 +197,9 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         function displayWeatherInfo() {
           // 'Rain'인 경우 'weatherData.list[2].rain.1h'의 정보 출력, 그렇지 않은 경우 '0' 출력
           if (weatherData.list[2].weather[0].main === 'Rain') {
-            document.getElementById('WeatherInfo').textContent = weatherData.list[2].rain['1h'] + "mm";
+            document.getElementById('WeatherInfo').innerHTML = `${rainAmount}<span>mm</span>`;
           } else {
-            document.getElementById('WeatherInfo').textContent = "0mm";
+            document.getElementById('WeatherInfo').innerHTML = "0<span>mm</span>";
           }
         }
 
@@ -215,9 +227,9 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         5번째 기능: 현재 온도 기반 옷차림 추천
         맨 아래에 suggestedOutfit 함수 구현 후 호출
         */
-        const outfitElement = document.getElementById('outfit');    //HTML의 id:outfit와 연결
+        // const outfitElement = document.getElementById('outfit');    //HTML의 id:outfit와 연결
         const suggestedOutfit = suggestOutfit(temperature); //함수 호출
-        outfitElement.innerHTML = `추천 옷차림: ${suggestedOutfit}`;    //HTML에 출력
+        // outfitElement.innerHTML = `추천 옷차림: ${suggestedOutfit}`;    //HTML에 출력
 
         /*
         6번째 기능: 내일의 정보 출력
@@ -300,22 +312,22 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         // 대기질 심각 수준에 따른 텍스트 정의
         switch (airquality) {
           case 1:
-            airqualityText = 'NO';
+            airqualityText = '좋음';
             break;
           case 2:
-            airqualityText = 'NO';
+            airqualityText = '보통';
             break;
           case 3:
-            airqualityText = 'NO';
+            airqualityText = '보통';
             break;
           case 4:
-            airqualityText = 'YES';
+            airqualityText = '나쁨';
             break;
           case 5:
-            airqualityText = 'YES';
+            airqualityText = '매우 나쁨';
             break;
           default:
-            airqualityText = 'Unknown';
+            airqualityText = '알 수 없음';
             break;
         }
 
