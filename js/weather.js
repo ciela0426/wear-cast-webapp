@@ -33,7 +33,7 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         활용 : api정보의 3번째 데이터(list[2])를 활용
         */
         const weatherDescription = weatherData.list[2].weather[0].description;  // 상태(ex:맑음)
-        const temperature = weatherData.list[2].main.temp.toFixed(1);  //온도
+        const temperature = weatherData.list[2].main.temp.toFixed(0);  //온도
         const humidity = weatherData.list[2].main.humidity; //습도
         const windSpeed = weatherData.list[2].wind.speed;   //풍속
         const maxTemperature = weatherData.list[2].main.temp_max;    //3시간 동안 최고온도
@@ -66,7 +66,7 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         const todayWeatherDescElement = document.getElementById('todayWeatherDesc');
         const todayWeatherTempElement = document.getElementById('todayWeatherTemp');
         const todayHumidElement = document.getElementById('todayHumid');
-        const todaysunriseTimeElement = document.getElementById('sunriseTime');
+                const todaysunriseTimeElement = document.getElementById('sunriseTime');
         const todaysunsetTimeElement = document.getElementById('sunsetTime');
         const currentWindElement = document.getElementById('windspeed');
         const weatherIconElement = document.getElementById('todayIcon')
@@ -122,7 +122,7 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         // 받아온 날씨 데이터를 배열에 입력
         for (let i = 0; i <= 7; i++) {
           const time = weatherData.list[i].dt_txt;
-          const temperature = weatherData.list[i].main.temp.toFixed(1);
+          const temperature = weatherData.list[i].main.temp.toFixed(0);
           const weatherIconCode = weatherData.list[i].weather[0].icon;
           // 날씨 정보 객체 생성 및 배열에 추가
           const weatherInfo = {
@@ -322,25 +322,12 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         let airqualityText = '';
 
         // 대기질 심각 수준에 따른 텍스트 정의
-        switch (airquality) {
-          case 1:
-            airqualityText = 'NO';
-            break;
-          case 2:
-            airqualityText = 'NO';
-            break;
-          case 3:
-            airqualityText = 'NO';
-            break;
-          case 4:
-            airqualityText = 'YES';
-            break;
-          case 5:
-            airqualityText = 'YES';
-            break;
-          default:
-            airqualityText = 'Unknown';
-            break;
+        if (airquality >= 1 && airquality <= 3) {
+          airqualityText = 'NO';
+        } else if (airquality >= 4 && airquality <= 5) {
+          airqualityText = 'YES';
+        } else {
+          airqualityText = 'Unknown';
         }
 
         const AirPollutionElement = document.getElementById('Air-Pollution');
