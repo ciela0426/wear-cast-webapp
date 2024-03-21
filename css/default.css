@@ -389,7 +389,7 @@ body>.container>.box-top {
   justify-content: space-around;
   width: 24px;
   height: 24px;
-  background: url(../public/images/small_sun.png) no-repeat 50% 50%;
+  background: url(../public/images/${weatherCode}.png) no-repeat 50% 50%;
   background-size: contain;
 }
 

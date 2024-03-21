@@ -87,11 +87,13 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         for (let i = 0; i <= 7; i++) {
           const time = weatherData.list[i].dt_txt;
           const temperature = weatherData.list[i].main.temp.toFixed(1);
+          const weatherIconCode = weatherData.list[i].weather[0].icon;
           // 날씨 정보 객체 생성 및 배열에 추가
           const weatherInfo = {
             day: time.substr(5, 2) + "." + time.substr(8, 2),
             hour: time.substr(11, 5),
             temperature: temperature,
+            weatherIconCode: weatherIconCode,
 
           };
           weatherDataArray.push(weatherInfo);
@@ -104,14 +106,14 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
           // 날씨 요소 생성
           const weatherElement = document.createElement('div');
           weatherElement.classList.add('weather-element');
-
+          
           // 요소 내용 설정
           weatherElement.innerHTML = `
     <div class="element-date">
       <p class="text-element-day">${data.day}</p>
       <p class="text-element-time">${data.hour}</p>
     </div>
-    <div class="img-element-weather"></div>
+    <img class="img-element-weather" src="./public/images/${data.weatherIconCode}.png" alt="Weather Icon">
     <p class="element-temp">${data.temperature}<span>°</span></p>
   `;
 
