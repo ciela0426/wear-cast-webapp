@@ -36,8 +36,8 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         const temperature = weatherData.list[2].main.temp.toFixed(0);  //온도
         const humidity = weatherData.list[2].main.humidity; //습도
         const windSpeed = weatherData.list[2].wind.speed;   //풍속
-        const maxTemperature = weatherData.list[2].main.temp_max;    //3시간 동안 최고온도
-        const minTemperature = weatherData.list[2].main.temp_min;   //3시간 동안 최저온도
+        // const maxTemperature = weatherData.list[2].main.temp_max;    //3시간 동안 최고온도
+        // const minTemperature = weatherData.list[2].main.temp_min;   //3시간 동안 최저온도
         const sunriseTimeUTC = new Date(weatherData.city.sunrise * 1000); // UTC 시간으로 일몰 시간을 가져옴
         const sunriseTimeKST = new Date(sunriseTimeUTC.getTime() - (9 * 60 * 60 * 1000) + (9 * 60 * 60 * 1000)); // UTC 시간에서 9시간을 빼고 다시 9시간을 더하여 한국 시간으로 변환
         const sunriseHour = sunriseTimeKST.getHours().toString().padStart(2, '0'); // getHours()를 사용하여 한국 시간의 시간을 가져옴
@@ -60,7 +60,7 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
 
         const formattedDate = `${month} ${day}일, ${year} ${hour}:${minute < 10 ? '0' : ''}${minute}`;
 
-        //현재 시각, 현재 날씨상태, 현재 온도 HTML로 출력
+        //정보들을 HTML로 출력하기 위해 ID 설정
         const timeElement = document.getElementById('current-time');
         const todayWeatherDescElement = document.getElementById('todayWeatherDesc');
         const todayWeatherTempElement = document.getElementById('todayWeatherTemp');
@@ -80,28 +80,30 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         currentWindElement.innerHTML = `${windSpeed}` + "<span>m/s</span>";
         weatherIconElement.src = iconUrl;
 
-        // sunset-bar-now 요소 선택
-        const sunsetBarNow = document.getElementById('sunset-bar-now');
+        //5번째 함수 호출(bar표현)
+        setSunsetBarWidth();
+        // // sunset-bar-now 요소 선택
+        // const sunsetBarNow = document.getElementById('sunset-bar-now');
 
-        // 현재 시간을 얻기
-        var now = new Date();
+        // // 현재 시간을 얻기
+        // var now = new Date();
 
-        // 현재 시간을 시간, 분, 초 단위로 변환
-        var hours = now.getHours();
-        var minutes = now.getMinutes();
-        var seconds = now.getSeconds();
+        // // 현재 시간을 시간, 분, 초 단위로 변환
+        // var hours = now.getHours();
+        // var minutes = now.getMinutes();
+        // var seconds = now.getSeconds();
 
-        // 하루의 총 초 수
-        var totalSecondsInDay = 24 * 60 * 60;
+        // // 하루의 총 초 수
+        // var totalSecondsInDay = 24 * 60 * 60;
 
-        // 현재까지의 총 초 수 계산
-        var totalSecondsPassed = (hours * 60 * 60) + (minutes * 60) + seconds;
+        // // 현재까지의 총 초 수 계산
+        // var totalSecondsPassed = (hours * 60 * 60) + (minutes * 60) + seconds;
 
-        // 백분율 계산
-        var percentagePassed = (totalSecondsPassed / totalSecondsInDay) * 100;
+        // // 백분율 계산
+        // var percentagePassed = (totalSecondsPassed / totalSecondsInDay) * 100;
 
-        // sunset-bar-now 요소의 너비 설정
-        sunsetBarNow.style.width = percentagePassed + '%';
+        // // sunset-bar-now 요소의 너비 설정
+        // sunsetBarNow.style.width = percentagePassed + '%';
 
 
         /*
@@ -262,17 +264,20 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
        현재 날씨에서 비가 올 시 API내에서 강수량 정보를 얻을 수 있는데 비가 안 올 시 제공해주지 않음
        비가 올 시 강수량 정보를 얻어와서 출력하고 비가 안 올 시 '0'을 출력한다.
        */
-        function displayWeatherInfo() {
-          // 'Rain'인 경우 'weatherData.list[2].rain.1h'의 정보 출력, 그렇지 않은 경우 '0' 출력
-          if (weatherData.list[2].weather[0].main === 'Rain') {
-            document.getElementById('WeatherInfo').innerHTML = `${rainAmount}<span>mm</span>`;
-          } else {
-            document.getElementById('WeatherInfo').innerHTML = "0<span>mm</span>";
-          }
+       function displayWeatherInfo() {
+        let rainAmount = 0; // 비가 내린 양을 저장할 변수를 초기화합니다.
+      
+        // 'Rain'인 경우 'weatherData.list[2].rain.1h'의 정보를 가져와 rainAmount 변수에 할당합니다.
+        if (weatherData.list[2].weather[0].main === 'Rain') {
+          rainAmount = weatherData.list[2].rain ? weatherData.list[2].rain['1h'] : 0;
         }
-
-        // 함수 호출
-        displayWeatherInfo();
+      
+        // 비가 내린 양을 화면에 출력합니다.
+        document.getElementById('WeatherInfo').innerHTML = `${rainAmount}<span>mm</span>`;
+      }
+      
+      // 함수 호출
+      displayWeatherInfo();
 
 
 
@@ -557,4 +562,30 @@ function display3Weather(weatherData) {
     // 생성한 요소를 weatherListElement에 추가
     weatherListElement.appendChild(weatherElement);
   });
+}
+
+//5번째 기능(bar 표현)
+function setSunsetBarWidth() {
+  // sunset-bar-now 요소 선택
+  const sunsetBarNow = document.getElementById('sunset-bar-now');
+
+  // 현재 시간을 얻기
+  var now = new Date();
+
+  // 현재 시간을 시간, 분, 초 단위로 변환
+  var hours = now.getHours();
+  var minutes = now.getMinutes();
+  var seconds = now.getSeconds();
+
+  // 하루의 총 초 수
+  var totalSecondsInDay = 24 * 60 * 60;
+
+  // 현재까지의 총 초 수 계산
+  var totalSecondsPassed = (hours * 60 * 60) + (minutes * 60) + seconds;
+
+  // 백분율 계산
+  var percentagePassed = (totalSecondsPassed / totalSecondsInDay) * 100;
+
+  // sunset-bar-now 요소의 너비 설정
+  sunsetBarNow.style.width = percentagePassed + '%';
 }
