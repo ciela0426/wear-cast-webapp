@@ -39,8 +39,16 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         const maxTemperature = weatherData.list[2].main.temp_max;    //3시간 동안 최고온도
         const minTemperature = weatherData.list[2].main.temp_min;   //3시간 동안 최저온도
         const date = weatherData.list[2].dt_txt;    //측정시각(ex:2024-03-19 09:00:00)
-        const sunriseTime = new Date(weatherData.city.sunrise * 1000).toLocaleTimeString(); //일출시간
-        const sunsetTime = new Date(weatherData.city.sunset * 1000).toLocaleTimeString();   //일몰시간
+        const sunriseTimeUTC = new Date(weatherData.city.sunrise * 1000); // UTC 시간으로 일몰 시간을 가져옴
+        const sunriseTimeKST = new Date(sunriseTimeUTC.getTime() - (9 * 60 * 60 * 1000) + (9 * 60 * 60 * 1000)); // UTC 시간에서 9시간을 빼고 다시 9시간을 더하여 한국 시간으로 변환
+        const sunriseHour = sunriseTimeKST.getHours().toString().padStart(2, '0'); // getHours()를 사용하여 한국 시간의 시간을 가져옴
+        const sunriseMinute = sunriseTimeKST.getMinutes().toString().padStart(2, '0'); // getMinutes()를 사용하여 한국 시간의 분을 가져옴
+        const formattedSunriseTime = `${sunriseHour}:${sunriseMinute}`; // 형식화된 일몰 시간을 생성 
+        const sunsetTimeUTC = new Date(weatherData.city.sunset * 1000); // UTC 시간으로 일몰 시간을 가져옴
+        const sunsetTimeKST = new Date(sunsetTimeUTC.getTime() - (9 * 60 * 60 * 1000) + (9 * 60 * 60 * 1000)); // UTC 시간에서 9시간을 빼고 다시 9시간을 더하여 한국 시간으로 변환
+        const sunsetHour = sunsetTimeKST.getHours().toString().padStart(2, '0'); // getHours()를 사용하여 한국 시간의 시간을 가져옴
+        const sunsetMinute = sunsetTimeKST.getMinutes().toString().padStart(2, '0'); // getMinutes()를 사용하여 한국 시간의 분을 가져옴
+        const formattedSunsetTime = `${sunsetHour}:${sunsetMinute}`; // 형식화된 일몰 시간을 생성
         const currentDate = new Date(); //현재 날짜 얻어옴
         const weatherIconCode = weatherData.list[2].weather[0].icon;
 
@@ -58,6 +66,8 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         const todayWeatherDescElement = document.getElementById('todayWeatherDesc');
         const todayWeatherTempElement = document.getElementById('todayWeatherTemp');
         const todayHumidElement = document.getElementById('todayHumid');
+        const todaysunriseTimeElement = document.getElementById('sunriseTime');
+        const todaysunsetTimeElement = document.getElementById('sunsetTime');
         const currentWindElement = document.getElementById('windspeed');
         const weatherIconElement = document.getElementById('todayIcon')
         const iconUrl = `./public/images/${weatherIconCode}.png`; // 이미지 파일의 경로
@@ -66,6 +76,8 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         todayWeatherDescElement.innerHTML = `${weatherDescription}`;
         todayWeatherTempElement.innerHTML = `${temperature}` + "<span>°</span>";
         todayHumidElement.innerHTML = `${humidity}` + "<span>%</span>";
+        todaysunriseTimeElement.innerHTML = `${formattedSunriseTime}`;
+        todaysunsetTimeElement.innerHTML = formattedSunsetTime;
         currentWindElement.innerHTML = `${windSpeed}` + "<span>m/s</span>";
         weatherIconElement.src = iconUrl;
 
@@ -227,9 +239,9 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         5번째 기능: 현재 온도 기반 옷차림 추천
         맨 아래에 suggestedOutfit 함수 구현 후 호출
         */
-        // const outfitElement = document.getElementById('outfit');    //HTML의 id:outfit와 연결
+        const outfitElement = document.getElementById('outfit');    //HTML의 id:outfit와 연결
         const suggestedOutfit = suggestOutfit(temperature); //함수 호출
-        // outfitElement.innerHTML = `추천 옷차림: ${suggestedOutfit}`;    //HTML에 출력
+        outfitElement.innerHTML = `추천 옷차림: ${suggestedOutfit}`;    //HTML에 출력
 
         /*
         6번째 기능: 내일의 정보 출력
@@ -312,22 +324,22 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         // 대기질 심각 수준에 따른 텍스트 정의
         switch (airquality) {
           case 1:
-            airqualityText = '좋음';
+            airqualityText = 'NO';
             break;
           case 2:
-            airqualityText = '보통';
+            airqualityText = 'NO';
             break;
           case 3:
-            airqualityText = '보통';
+            airqualityText = 'NO';
             break;
           case 4:
-            airqualityText = '나쁨';
+            airqualityText = 'YES';
             break;
           case 5:
-            airqualityText = '매우 나쁨';
+            airqualityText = 'YES';
             break;
           default:
-            airqualityText = '알 수 없음';
+            airqualityText = 'Unknown';
             break;
         }
 

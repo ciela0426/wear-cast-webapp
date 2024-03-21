@@ -95,7 +95,7 @@ body>.container>.box-top {
 .container>.box-top>.box-left>.box-left-card-weather>.img-weather {
   width: 300px;
   height: 300px;
-  background: url(../public/images/sun_rain.png) no-repeat 50% 50%;
+  background: url(../public/images/${weatherCode}.png) no-repeat 50% 50%;
   background-size: contain;
 }
 
@@ -167,6 +167,7 @@ body>.container>.box-top {
   padding: 12px;
   gap: 4px;
 }
+
 
 .container>.box-top>.box-right>.box-detail-weather>.box>.icon {
   width: 32px;
@@ -281,10 +282,20 @@ body>.container>.box-top {
   background-size: contain;
 }
 
-.container>.box-top>.box-right>.box-sun>.sunset-bar>progress {
-  width: 316px;
-  border: 10px;
+.box-top > .box-right > .box-sun > .sunset-bar {
+  width: 100%;
+  height: 10px;
+  border-radius: 5px;
+  background: #1e1e1e;
 }
+.box-top > .box-right > .box-sun > .sunset-bar > .sunset-bar-now {
+  height: 10px;
+  border-radius: 5px;
+  background: linear-gradient(0.25turn, #0befa1, #5b82fd);
+}
+
+
+
 /* 24시간 날씨 테이블 */
 .container>.weather-table {
   position: relative;
@@ -378,7 +389,7 @@ body>.container>.box-top {
   justify-content: space-around;
   width: 24px;
   height: 24px;
-  background: url(../public/images/small_sun.png) no-repeat 50% 50%;
+  background: url(../public/images/${weatherCode}.png) no-repeat 50% 50%;
   background-size: contain;
 }
 
