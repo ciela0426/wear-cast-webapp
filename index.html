@@ -18,15 +18,15 @@
         <div class="box-left-info">
           <div class="box-location">
             <div class="icon-location"></div>
-            <p class="text-location">서울특별시, 대한민국</p>
+            <p class="text-location" id="location"></p>
           </div>
-          <p class="text-date">3월 17일, 2024 11:39</p>
+          <p class="text-date" id="current-time"></p>
         </div>
         <div class="box-left-card-weather">
           <div class="img-weather"></div>
           <div class="card-right">
             <p class="card-explain">흐리고 한때 비</p>
-            <p class="card-temp">13<span>°</span></p>
+            <p class="card-temp" id="todayWeatherTemp"></p>
           </div>
         </div>
       </div>
@@ -35,27 +35,27 @@
         <div class="box-detail-weather">
           <div class="box">
             <div class="icon"></div>
-            <p>48<span>%</span></p>
+            <p id="humidity"></p>
           </div>
           <div class="box">
             <div class="icon"></div>
-            <p>48<span>%</span></p>
+            <p id="windspeed"></p>
           </div>
           <div class="box">
             <div class="icon"></div>
-            <p>48<span>%</span></p>
+            <p id="WeatherInfo"></p>
           </div>
           <div class="box">
             <div class="icon"></div>
-            <p>48<span>%</span></p>
+            <p id="rain"></p>
           </div>
           <div class="box">
             <div class="icon"></div>
-            <p>48<span>%</span></p>
+            <p id="Air-Pollution"></p>
           </div>
           <div class="box">
             <div class="icon"></div>
-            <p>48<span>%</span></p>
+            <p id="HumidityStatus"></p>
           </div>
         </div>
         <div class="centered-text">
@@ -67,7 +67,7 @@
             <p>06:11</p>
           </div>
           <div class="sunset-bar">
-            <gress value="50" min="0" maprox="100" ></progress>
+            <gress value="50" min="0" maprox="100"></progress>
           </div>
           <div class="sunset-time">
             <div class="sundown-icon"></div>
@@ -167,7 +167,8 @@
       <button class="Github"></button>
     </div>
   </footer>
-  <!-- <h1>현재 날씨 정보</h1>
+
+<!-- <h1>현재 날씨 정보</h1>
 <div id="weather"></div>
 <h1>현재 시각</h1>
 <div id="current-time"></div>
@@ -184,7 +185,7 @@
 <h1>모레 예보</h1>
 <div id="forecast3"></div>
 <h1>최저/최고 기온</h1>
-<div id="lowesthighest-temperature"></div> —>
+<div id="lowesthighest-temperature"></div> —> -->
     <script src="./js/weather.js"></script>
 </body>
 
