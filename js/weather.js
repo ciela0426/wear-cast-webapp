@@ -82,49 +82,13 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
 
         //5번째 함수 호출(bar표현)
         setSunsetBarWidth();
-        // // sunset-bar-now 요소 선택
-        // const sunsetBarNow = document.getElementById('sunset-bar-now');
-
-        // // 현재 시간을 얻기
-        // var now = new Date();
-
-        // // 현재 시간을 시간, 분, 초 단위로 변환
-        // var hours = now.getHours();
-        // var minutes = now.getMinutes();
-        // var seconds = now.getSeconds();
-
-        // // 하루의 총 초 수
-        // var totalSecondsInDay = 24 * 60 * 60;
-
-        // // 현재까지의 총 초 수 계산
-        // var totalSecondsPassed = (hours * 60 * 60) + (minutes * 60) + seconds;
-
-        // // 백분율 계산
-        // var percentagePassed = (totalSecondsPassed / totalSecondsInDay) * 100;
-
-        // // sunset-bar-now 요소의 너비 설정
-        // sunsetBarNow.style.width = percentagePassed + '%';
-
 
         /*
-        2번째 기능: 24시간 날씨 출력
-        API 정보의 0~7번 인덱스의 정보 출력: 최근 6시간 전/최근 3시간 전/최근 기록/3시간 후/.../15시간 후
-        HTML에서의 반복이 아닌 js에서의 반복으로 처리
-        현재 최고,최저 온도 기능은 구현만 하고 사용하진 않음(무시)
+        2번째 기능: 페이지 하단 8칸 대입
+        0: 오늘24시간날씨, 1: 내일 날씨, 2: 내일 모레날씨
+        현재 반복되도록 구현
         */
-        // 24시간 정보 HTML에 출력
-        // const forecastElement = document.getElementById('forecast'); // HTML의 id:forecast와 연결
-        // let max = weatherData.list[0].main.temp_max; // 최고 온도 초기화
-        // let min = weatherData.list[0].main.temp_min; // 최저 온도 초기화
 
-        // //24시간 날씨 출력 함수 호출
-        // display24WeatherData(weatherData);
-
-        // //내일 날씨 출력 함수 호출
-        // displayTomorrowWeather(weatherData);
-
-        // //내일 모래 날씨 출력 함수 호출
-        //display3Weather(weatherData);
 
         let currentDataIndex = 0; // 현재 표시 중인 데이터 인덱스 (0: 24시간 데이터, 1: 내일 데이터, 2: 내일 모레 데이터)
         displayData();
@@ -174,114 +138,30 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
           }
         }
 
-        //       // 날씨 정보 배열 초기화
-        //       const weatherDataArray = [];
-
-        //       // 받아온 날씨 데이터를 배열에 입력
-        //       for (let i = 0; i <= 7; i++) {
-        //         const time = weatherData.list[i].dt_txt;
-        //         const temperature = weatherData.list[i].main.temp.toFixed(1);
-        //         const weatherIconCode = weatherData.list[i].weather[0].icon;
-        //         // 날씨 정보 객체 생성 및 배열에 추가
-        //         const weatherInfo = {
-        //           day: time.substr(5, 2) + "." + time.substr(8, 2), //날짜만 표시(ex:03.15)
-        //           hour: time.substr(11, 5), //시간만 표시(ex:18:00)
-        //           temperature: temperature,
-        //           weatherIconCode: weatherIconCode, //날씨 코드
-
-        //         };
-        //         weatherDataArray.push(weatherInfo);
-        //       }
-        //       // 날씨 정보를 표시할 요소를 가져옴
-        //       const weatherListElement = document.querySelector('.weather-list');
-
-        //       // 날씨 정보 배열을 반복하여 요소 생성
-        //       weatherDataArray.forEach(data => {
-        //         // 날씨 요소 생성
-        //         const weatherElement = document.createElement('div');
-        //         weatherElement.classList.add('weather-element');
-
-        //         // 요소 내용 설정
-        //         weatherElement.innerHTML = `
-        //   <div class="element-date">
-        //     <p class="text-element-day">${data.day}</p>
-        //     <p class="text-element-time">${data.hour}</p>
-        //   </div>
-        //   <img class="img-element-weather" src="./public/images/${data.weatherIconCode}.png" alt="Weather Icon">
-        //   <p class="element-temp">${data.temperature}<span>°</span></p>
-        // `;
-
-        //         // 생성한 요소를 weatherListElement에 추가
-        //         weatherListElement.appendChild(weatherElement);
-        //       });
-
-
-        // const ulElement = document.querySelector('.weather-list ul');
-        // for (let i = 0; i <= 7; i++) {
-        //   const weatherDescription = weatherData.list[i].weather[0].description;
-        //   const temperature = weatherData.list[i].main.temp.toFixed(1);
-        //   const time = weatherData.list[i].dt_txt;
-        //   // const maxT = weatherData.list[i].main.temp_max;
-        //   // const minT = weatherData.list[i].main.temp_min;
-
-        //   // 24시간 내의 최고, 최저 온도 갱신
-        //   // if (weatherData.list[i].main.temp_max > max) {
-        //   //   max = weatherData.list[i].main.temp_max;
-        //   // }
-        //   // if (weatherData.list[i].main.temp_min < min) {
-        //   //   min = weatherData.list[i].main.temp_min;
-        //   // }
-
-        //   // forecastElement.innerHTML += `날씨: ${weatherDescription}, 온도: ${temperature}, 시간: ${time}, 최고 온도: ${maxT}, 최저 온도: ${minT}<br>`;
-
-        //   // li 요소 생성
-        //   const liElement = document.createElement('li');
-
-        //   // li 요소 내부에 날씨 정보 추가
-        //   liElement.innerHTML = `
-        //      <div class="weather-element last">
-        //          <div class="element-date">
-        //              <p class="text-element-day">${time.substr(5, 2)}.${time.substr(8, 2)}</p>
-        //         <p class="text-element-time">${time.substr(11, 5)}</p>
-        //          </div>
-        //          <div class="img-element-weather">
-        //              <img src="./public/images/small_sun.png" alt="">
-        //          </div>
-        //          <p class="element-temp">${temperature}°</p>
-        //      </div>
-        //  `;
-
-        //   // ul에 li 요소 추가
-        //   ulElement.appendChild(liElement);
-        // }
-
-        // forecastElement.innerHTML += `최고 온도: ${max}, 최저 온도: ${min}<br>`;
-
-
-
         /*
        3번째 기능: 현재 강수량 정보 출력
        현재 날씨에서 비가 올 시 API내에서 강수량 정보를 얻을 수 있는데 비가 안 올 시 제공해주지 않음
        비가 올 시 강수량 정보를 얻어와서 출력하고 비가 안 올 시 '0'을 출력한다.
        */
-       function displayWeatherInfo() {
-        let rainAmount = 0; // 비가 내린 양을 저장할 변수를 초기화합니다.
-      
-        // 'Rain'인 경우 'weatherData.list[2].rain.1h'의 정보를 가져와 rainAmount 변수에 할당합니다.
-        if (weatherData.list[2].weather[0].main === 'Rain') {
-          rainAmount = weatherData.list[2].rain ? weatherData.list[2].rain['1h'] : 0;
+
+        function displayWeatherInfo() {
+          let rainAmount = 0; // 비가 내린 양을 저장할 변수를 초기화합니다.
+
+          // 'Rain'인 경우 'weatherData.list[2].rain.1h'의 정보를 가져와 rainAmount 변수에 할당합니다.
+          if (weatherData.list[2].weather[0].main === 'Rain') {
+            rainAmount = weatherData.list[2].rain ? weatherData.list[2].rain['1h'] : 0;
+          }
+
+          // 비가 내린 경우에만 비가 내린 양을 출력합니다.
+          if (rainAmount > 0) {
+            document.getElementById('WeatherInfo').innerHTML = `${rainAmount}<span>mm</span>`;
+          } else {
+            document.getElementById('WeatherInfo').innerHTML = "0<span>mm</span>";
+          }
         }
-      
-        // 비가 내린 경우에만 비가 내린 양을 출력합니다.
-        if (rainAmount > 0) {
-          document.getElementById('WeatherInfo').innerHTML = `${rainAmount}<span>mm</span>`;
-        } else {
-          document.getElementById('WeatherInfo').innerHTML = "0<span>mm</span>";
-        }
-      }
-      
-      // 함수 호출
-      displayWeatherInfo();
+
+        // 함수 호출
+        displayWeatherInfo();
 
 
 
@@ -309,33 +189,7 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         outfitElement.innerHTML = `추천 옷차림: ${suggestedOutfit}`;    //HTML에 출력
 
         /*
-        6번째 기능: 내일의 정보 출력
-        구현 : 내일의 정보를 얻어오기 위해 현재 날짜를 가져오고 +1 정보 추출(필터링)
-        추가적으로 내일 모래도 가능함
-        */
-
-        // // 내일 계산
-        // const tomorrow = new Date(currentDate);
-        // tomorrow.setDate(currentDate.getDate() + 1);
-
-        // // 내일 데이터 추출
-        // // filter메서드를 사용해 내일에 해당하는 정보만 필터링
-        // const tomorrowWeatherData = weatherData.list.filter(item => {
-        //   const date = new Date(item.dt_txt);
-        //   return date.getDate() === tomorrow.getDate();
-        // });
-
-        // // 내일 데이터 출력
-        // for (const item of tomorrowWeatherData) {
-        //   const weatherDescription = item.weather[0].description; //추출된 정보의 날씨 상태(ex:맑음)
-        //   const temperature = item.main.temp;
-        //   const time = item.dt_txt;
-        //   // const forecast2Element = document.getElementById('forecast2');  //HTML의 id:forecast2와 연결
-        //   // forecast2Element.innerHTML += `날씨: ${weatherDescription}, 온도: ${temperature} 시간: ${time}<br>`;    //HTML에 출력
-        // }
-
-        /*
-        7번째 기능: 온도별 권장 습도에 따라 습도 상태 출력
+        6번째 기능: 온도별 권장 습도에 따라 습도 상태 출력
         구현 : 온도별 권장 습도 +-5% 내에 있을 시 'GOOD' 출력, 권장습도 범위를 벗어날 시 'BAD' 출력
         */
         function checkCondition(temperature, humidity) {
@@ -373,7 +227,7 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
       })
 
     /*
-    8번째 기능: 대기질 현황을 받아와 대기질 상태를 출력
+    7번째 기능: 3번째 API 사용, 대기질 현황을 받아와 대기질 상태를 출력
     구현 : 대기질을 받아올 수 있는 API에서 실시간 대기질 현황을 받아와 각 단계별 대기질 상태 대입 후 출력
     */
 
@@ -437,7 +291,10 @@ function suggestOutfit(temperature) {
   return outfit;
 }
 
-//2번째 함수(24시)
+/*
+2번째 함수: 24시간 날씨 정보 입력
+구현 : 새로운 배열을 만들어 배열에 시간,온도,코드 반복문으로 저장하고 출력
+*/
 function display24WeatherData(weatherData) {
   // 날씨 정보 배열 초기화
   const weatherDataArray = [];
@@ -445,7 +302,7 @@ function display24WeatherData(weatherData) {
   // 받아온 날씨 데이터를 배열에 입력
   for (let i = 0; i <= 7; i++) {
     const time = weatherData.list[i].dt_txt;
-    const temperature = weatherData.list[i].main.temp.toFixed(0);
+    const temperature = weatherData.list[i].main.temp.toFixed(0); //정수로 반올림
     const weatherIconCode = weatherData.list[i].weather[0].icon;
     // 날씨 정보 객체 생성 및 배열에 추가
     const weatherInfo = {
@@ -480,13 +337,16 @@ function display24WeatherData(weatherData) {
   });
 }
 
-//3번째 기능(내일)
+/*
+3번째 함수 : 내일 날씨 데이터 8개 출력
+구현 : 필터링
+*/
 function displayTomorrowWeather(weatherData) {
   const currentDate = new Date();
 
   // 내일 계산
   const tomorrow = new Date(currentDate);
-  tomorrow.setDate(currentDate.getDate() + 1);
+  tomorrow.setDate(currentDate.getDate() + 1);  //내일까지 필터링
 
   // 내일 데이터 추출
   const tomorrowWeatherData = weatherData.list.filter(item => {
@@ -524,13 +384,16 @@ function displayTomorrowWeather(weatherData) {
   });
 }
 
-//4번째 기능(내일모레)
+/*
+4번째 함수 : 내일 모레 날씨 데이터 8개 출력
+구현 : 필터링
+*/
 function display3Weather(weatherData) {
   const currentDate = new Date();
 
   // 내일 계산
   const tomorrow = new Date(currentDate);
-  tomorrow.setDate(currentDate.getDate() + 2);
+  tomorrow.setDate(currentDate.getDate() + 2);  //모레까지 필터링
 
   // 내일 데이터 추출
   const tomorrowWeatherData = weatherData.list.filter(item => {
@@ -568,7 +431,10 @@ function display3Weather(weatherData) {
   });
 }
 
-//5번째 기능(bar 표현)
+/*
+5번째 함수 : 하루 진행도 표현
+구현 : 백분율을 리턴받아 bar형태로 가시화
+*/
 function setSunsetBarWidth() {
   // sunset-bar-now 요소 선택
   const sunsetBarNow = document.getElementById('sunset-bar-now');
