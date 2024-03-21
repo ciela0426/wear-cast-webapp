@@ -38,10 +38,11 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         const windSpeed = weatherData.list[2].wind.speed;   //풍속
         const maxTemperature = weatherData.list[2].main.temp_max;    //3시간 동안 최고온도
         const minTemperature = weatherData.list[2].main.temp_min;   //3시간 동안 최저온도
+        const date = weatherData.list[2].dt_txt;    //측정시각(ex:2024-03-19 09:00:00)
         const sunriseTime = new Date(weatherData.city.sunrise * 1000).toLocaleTimeString(); //일출시간
         const sunsetTime = new Date(weatherData.city.sunset * 1000).toLocaleTimeString();   //일몰시간
-        const date = weatherData.list[2].dt_txt;    //측정시각(ex:2024-03-19 09:00:00)
         const currentDate = new Date(); //현재 날짜 얻어옴
+        const weatherIconCode = weatherData.list[2].weather[0].icon;
 
         //현재 시각을 원하는 포맷으로 출력하기 위한 처리
         const month = currentDate.toLocaleString('default', { month: 'long' });
@@ -58,12 +59,15 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         const todayWeatherTempElement = document.getElementById('todayWeatherTemp');
         const todayHumidElement = document.getElementById('todayHumid');
         const currentWindElement = document.getElementById('windspeed');
+        const weatherIconElement = document.getElementById('todayIcon')
+        const iconUrl = `./public/images/${weatherIconCode}.png`; // 이미지 파일의 경로
 
         timeElement.innerHTML = formattedDate;
         todayWeatherDescElement.innerHTML = `${weatherDescription}`;
         todayWeatherTempElement.innerHTML = `${temperature}` + "<span>°</span>";
         todayHumidElement.innerHTML = `${humidity}`+"<span>%</span>";
         currentWindElement.innerHTML = `${windSpeed}`;
+        weatherIconElement.src = iconUrl;
 
         /*
         2번째 기능: 24시간 날씨 출력
