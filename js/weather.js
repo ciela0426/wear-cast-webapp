@@ -47,7 +47,7 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         const month = currentDate.toLocaleString('default', { month: 'long' });
         const day = currentDate.getDate();
         const year = currentDate.getFullYear();
-        let hour = currentDate.getHours();WeatherInfo
+        let hour = currentDate.getHours();
         const minute = currentDate.getMinutes();
 
         const formattedDate = `${month} ${day}일, ${year} ${hour}:${minute < 10 ? '0' : ''}${minute}`;
@@ -56,13 +56,13 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         const timeElement = document.getElementById('current-time');
         const todayWeatherDescElement = document.getElementById('todayWeatherDesc');
         const todayWeatherTempElement = document.getElementById('todayWeatherTemp');
-        const currenthumidityElement = document.getElementById('humidity');
+        const todayHumidElement = document.getElementById('todayHumid');
         const currentWindElement = document.getElementById('windspeed');
 
         timeElement.innerHTML = formattedDate;
         todayWeatherDescElement.innerHTML = `${weatherDescription}`;
-        todayWeatherTempElement.innerHTML = `${temperature}°`;
-        currenthumidityElement.innerHTML = `${humidity}`;
+        todayWeatherTempElement.innerHTML = `${temperature}` + "<span>°</span>";
+        todayHumidElement.innerHTML = `${humidity}`+"<span>%</span>";
         currentWindElement.innerHTML = `${windSpeed}`;
 
         /*
@@ -76,54 +76,94 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         // let max = weatherData.list[0].main.temp_max; // 최고 온도 초기화
         // let min = weatherData.list[0].main.temp_min; // 최저 온도 초기화
 
-        const ulElement = document.querySelector('.weather-list ul');
+        // 날씨 정보 배열 초기화
+        const weatherDataArray = [];
+
+        // 받아온 날씨 데이터를 배열에 입력
         for (let i = 0; i <= 7; i++) {
-          const weatherDescription = weatherData.list[i].weather[0].description;
-          const temperature = weatherData.list[i].main.temp.toFixed(1);
           const time = weatherData.list[i].dt_txt;
-          // const maxT = weatherData.list[i].main.temp_max;
-          // const minT = weatherData.list[i].main.temp_min;
+          const temperature = weatherData.list[i].main.temp.toFixed(1);
+          // 날씨 정보 객체 생성 및 배열에 추가
+          const weatherInfo = {
+            day: time.substr(5, 2) + "." + time.substr(8, 2),
+            hour: time.substr(11, 5),
+            temperature: temperature,
 
-          // 24시간 내의 최고, 최저 온도 갱신
-          // if (weatherData.list[i].main.temp_max > max) {
-          //   max = weatherData.list[i].main.temp_max;
-          // }
-          // if (weatherData.list[i].main.temp_min < min) {
-          //   min = weatherData.list[i].main.temp_min;
-          // }
-
-          // forecastElement.innerHTML += `날씨: ${weatherDescription}, 온도: ${temperature}, 시간: ${time}, 최고 온도: ${maxT}, 최저 온도: ${minT}<br>`;
-
-          // li 요소 생성
-          const liElement = document.createElement('li');
-
-          // li 요소 내부에 날씨 정보 추가
-          liElement.innerHTML = `
-             <div class="weather-element last">
-                 <div class="element-date">
-                     <p class="text-element-day">${time.substr(5, 2)}.${time.substr(8, 2)}</p>
-                <p class="text-element-time">${time.substr(11, 5)}</p>
-                 </div>
-                 <div class="img-element-weather">
-                     <img src="./public/images/small_sun.png" alt="">
-                 </div>
-                 <p class="element-temp">${temperature}°</p>
-             </div>
-         `;
-
-          // ul에 li 요소 추가
-          ulElement.appendChild(liElement);
+          };
+          weatherDataArray.push(weatherInfo);
         }
+        // 날씨 정보를 표시할 요소를 가져옴
+        const weatherListElement = document.querySelector('.weather-list');
+
+        // 날씨 정보 배열을 반복하여 요소 생성
+        weatherDataArray.forEach(data => {
+          // 날씨 요소 생성
+          const weatherElement = document.createElement('div');
+          weatherElement.classList.add('weather-element');
+
+          // 요소 내용 설정
+          weatherElement.innerHTML = `
+    <div class="element-date">
+      <p class="text-element-day">${data.day}</p>
+      <p class="text-element-time">${data.hour}</p>
+    </div>
+    <div class="img-element-weather"></div>
+    <p class="element-temp">${data.temperature}<span>°</span></p>
+  `;
+
+          // 생성한 요소를 weatherListElement에 추가
+          weatherListElement.appendChild(weatherElement);
+        });
+
+
+        // const ulElement = document.querySelector('.weather-list ul');
+        // for (let i = 0; i <= 7; i++) {
+        //   const weatherDescription = weatherData.list[i].weather[0].description;
+        //   const temperature = weatherData.list[i].main.temp.toFixed(1);
+        //   const time = weatherData.list[i].dt_txt;
+        //   // const maxT = weatherData.list[i].main.temp_max;
+        //   // const minT = weatherData.list[i].main.temp_min;
+
+        //   // 24시간 내의 최고, 최저 온도 갱신
+        //   // if (weatherData.list[i].main.temp_max > max) {
+        //   //   max = weatherData.list[i].main.temp_max;
+        //   // }
+        //   // if (weatherData.list[i].main.temp_min < min) {
+        //   //   min = weatherData.list[i].main.temp_min;
+        //   // }
+
+        //   // forecastElement.innerHTML += `날씨: ${weatherDescription}, 온도: ${temperature}, 시간: ${time}, 최고 온도: ${maxT}, 최저 온도: ${minT}<br>`;
+
+        //   // li 요소 생성
+        //   const liElement = document.createElement('li');
+
+        //   // li 요소 내부에 날씨 정보 추가
+        //   liElement.innerHTML = `
+        //      <div class="weather-element last">
+        //          <div class="element-date">
+        //              <p class="text-element-day">${time.substr(5, 2)}.${time.substr(8, 2)}</p>
+        //         <p class="text-element-time">${time.substr(11, 5)}</p>
+        //          </div>
+        //          <div class="img-element-weather">
+        //              <img src="./public/images/small_sun.png" alt="">
+        //          </div>
+        //          <p class="element-temp">${temperature}°</p>
+        //      </div>
+        //  `;
+
+        //   // ul에 li 요소 추가
+        //   ulElement.appendChild(liElement);
+        // }
 
         // forecastElement.innerHTML += `최고 온도: ${max}, 최저 온도: ${min}<br>`;
 
 
 
-         /*
-        3번째 기능: 현재 강수량 정보 출력
-        현재 날씨에서 비가 올 시 API내에서 강수량 정보를 얻을 수 있는데 비가 안 올 시 제공해주지 않음
-        비가 올 시 강수량 정보를 얻어와서 출력하고 비가 안 올 시 '0'을 출력한다.
-        */
+        /*
+       3번째 기능: 현재 강수량 정보 출력
+       현재 날씨에서 비가 올 시 API내에서 강수량 정보를 얻을 수 있는데 비가 안 올 시 제공해주지 않음
+       비가 올 시 강수량 정보를 얻어와서 출력하고 비가 안 올 시 '0'을 출력한다.
+       */
         function displayWeatherInfo() {
           // 'Rain'인 경우 'weatherData.list[2].rain.1h'의 정보 출력, 그렇지 않은 경우 '0' 출력
           if (weatherData.list[2].weather[0].main === 'Rain') {
@@ -138,7 +178,6 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
 
 
 
-        
         // 4번째 기능 : 24시간 내에 비가 오는 지 확인
         // 한번이라도 비가 왔다면 변수에 저장
         // 추후에 우산 챙기는 기능에 사용가능
@@ -152,7 +191,7 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
         }
         // 비 내용 HTML에 출력
         const rainElement = document.getElementById('rain');    //HTML의 id:rain과 연결
-        rainElement.innerHTML = `24시간 내에 비가 오는지: ${isRaining ? 'YES' : 'NO'}`
+        rainElement.innerHTML = `${isRaining ? 'YES' : 'NO'}`
 
         /*
         5번째 기능: 현재 온도 기반 옷차림 추천
@@ -217,10 +256,11 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
           return "BAD";
         }
 
+        
         // 온도와 습도에 따라서 조건 확인 후 결과 표시
         const conditionElement = document.getElementById('HumidityStatus');
         const conditionResult = checkCondition(temperature, humidity);
-        conditionElement.innerHTML = `현재 상태: ${conditionResult}`; // HTML 요소에 결과 표시
+        conditionElement.innerHTML = `${conditionResult}`; // HTML 요소에 결과 표시
 
 
       })
@@ -229,7 +269,7 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
     8번째 기능: 대기질 현황을 받아와 대기질 상태를 출력
     구현 : 대기질을 받아올 수 있는 API에서 실시간 대기질 현황을 받아와 각 단계별 대기질 상태 대입 후 출력
     */
-    
+
     // 대기질 상태 받아오는 API
     const AirPollutionApiUrl = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=a2bef9ef4e8c7cb401ffa5e9cf298192&units=metric&lang=kr`;
 
