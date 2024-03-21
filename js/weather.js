@@ -272,8 +272,12 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
           rainAmount = weatherData.list[2].rain ? weatherData.list[2].rain['1h'] : 0;
         }
       
-        // 비가 내린 양을 화면에 출력합니다.
-        document.getElementById('WeatherInfo').innerHTML = `${rainAmount}<span>mm</span>`;
+        // 비가 내린 경우에만 비가 내린 양을 출력합니다.
+        if (rainAmount > 0) {
+          document.getElementById('WeatherInfo').innerHTML = `${rainAmount}<span>mm</span>`;
+        } else {
+          document.getElementById('WeatherInfo').innerHTML = "0<span>mm</span>";
+        }
       }
       
       // 함수 호출
