@@ -147,6 +147,24 @@ fetch('http://ip-api.com/json/')    // default는 접속한 기기의 ip
           forecast2Element.innerHTML += `날씨: ${weatherDescription}, 온도: ${temperature} 시간: ${time}<br>`;
         }
 
+                const Aftertomorrow = new Date(currentDate);
+                Aftertomorrow.setDate(currentDate.getDate() + 2);
+
+                // 다음 날짜의 데이터를 추출합니다.
+                const AftertomorrowWeatherData = weatherData.list.filter(item => {
+                    const date = new Date(item.dt_txt);
+                    return date.getDate() === Aftertomorrow.getDate();
+                });
+
+                // 추출된 데이터를 출력합니다.
+                for (const item of AftertomorrowWeatherData) {
+                    const weatherDescription = item.weather[0].description;
+                    const temperature = item.main.temp;
+                    const time = item.dt_txt;
+                    const forecast2Element = document.getElementById('forecast3');
+                    forecast2Element.innerHTML += `날씨: ${weatherDescription}, 온도: ${temperature} 시간: ${time}<br>`;
+                }
+
 
       })
 
