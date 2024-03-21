@@ -3,6 +3,9 @@
 <br/>
 <br/>
 
+# Notion
+- [Team Notion](https://www.notion.so/Wear-Cast-d5b534b1b84f4246bfaebd0735071fdd?pvs=4)
+
 # ✨ Feature
 
 - IP의 위치 정보에 따른 날씨 정보(상태, 평균기온, 습도, 풍속 등)
