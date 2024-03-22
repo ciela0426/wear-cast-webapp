@@ -105,3 +105,8 @@
         url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Black.ttf') format("truetype");
     font-display: swap;
 }
+
+@font-face {
+    font-family: "Designer";
+    src: url(../public/fonts/designer.otf);
+}

@@ -17,7 +17,7 @@ body {
   justify-content: space-between;
 }
 
-body > .container {
+body>.container {
   box-sizing: border-box;
   width: 1140px;
   padding-right: 56px;
@@ -25,13 +25,13 @@ body > .container {
   margin: auto;
   display: flex;
   flex-flow: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   gap: 12px;
 }
 
 /* 상단 */
-body > .container > .box-top {
+body>.container>.box-top {
   width: 100%;
   display: flex;
   flex-flow: row;
@@ -41,12 +41,12 @@ body > .container > .box-top {
 }
 
 /* 상단 왼쪽 */
-.container > .box-top > .box-left {
+.container>.box-top>.box-left {
   flex: 1;
   width: 100%;
 }
 
-.container > .box-top > .box-left > .box-left-info {
+.container>.box-top>.box-left>.box-left-info {
   width: 100%;
   display: flex;
   flex-flow: row;
@@ -54,7 +54,7 @@ body > .container > .box-top {
   justify-content: space-between;
 }
 
-.container > .box-top > .box-left > .box-left-info > .box-location {
+.container>.box-top>.box-left>.box-left-info>.box-location {
   display: flex;
   flex-flow: row;
   align-items: center;
@@ -63,31 +63,30 @@ body > .container > .box-top {
   padding: 4px;
 }
 
-.container
-  > .box-top
-  > .box-left
-  > .box-left-info
-  > .box-location
-  > .icon-location {
+.container>.box-top>.box-left>.box-left-info>.box-location>.icon-location {
   width: 24px;
   height: 24px;
   background: url(../public/images/location.png) no-repeat 50% 50%;
   background-size: contain;
 }
 
-.container
-  > .box-top
-  > .box-left
-  > .box-left-info
-  > .box-location
-  > .text-location {
+.container>.box-top>.box-left>.box-left-info>.box-location>.text-location {
   font-size: 16px;
   font-weight: 400;
   line-height: 22.4px;
+  align-items: center;
   color: rgba(170, 170, 170, 1);
 }
 
-.container > .box-top > .box-left > .box-left-info > .text-date {
+/* 추가 */
+.container>.box-top>.box-left>.box-left-info>.box-date {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.container>.box-top>.box-left>.box-left-info>.box-date>.text-date {
   font-size: 16px;
   font-weight: 300;
   line-height: 22.4px;
@@ -95,7 +94,16 @@ body > .container > .box-top {
   padding: 4px;
 }
 
-.container > .box-top > .box-left > .box-left-card-weather {
+.container>.box-top>.box-left>.box-left-info>.box-date>.icon-refresh {
+  width: 24px;
+  height: 24px;
+  background: url(../public/images/refresh.png) no-repeat 50% 50%;
+  background-size: contain;
+}
+
+/* 여기까지 */
+
+.container>.box-top>.box-left>.box-left-card-weather {
   display: flex;
   flex-flow: row;
   align-items: center;
@@ -105,27 +113,25 @@ body > .container > .box-top {
   border: 2px solid;
   background-color: #aaaaaa0d;
   /* 그림자, 테두리 */
-  border-image-source: linear-gradient(
-    123.89deg,
-    rgba(170, 170, 170, 0.3) 9.82%,
-    rgba(170, 170, 170, 0.05) 32.32%,
-    rgba(170, 170, 170, 0.2) 61.65%,
-    rgba(170, 170, 170, 0.05) 90.18%
-  );
+  border-image-source: linear-gradient(123.89deg,
+      rgba(170, 170, 170, 0.3) 9.82%,
+      rgba(170, 170, 170, 0.05) 32.32%,
+      rgba(170, 170, 170, 0.2) 61.65%,
+      rgba(170, 170, 170, 0.05) 90.18%);
   box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.15),
     4px 4px 4px 0px rgba(255, 255, 255, 0.1) inset;
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
 }
 
-.container > .box-top > .box-left > .box-left-card-weather > .img-weather {
+.container>.box-top>.box-left>.box-left-card-weather>.img-weather {
   width: 300px;
   height: 300px;
   /* background: url(../public/images/${weatherCode}.png) no-repeat 50% 50%; */
   /* background-size: contain; */
 }
 
-.container > .box-top > .box-left > .box-left-card-weather > .card-right {
+.container>.box-top>.box-left>.box-left-card-weather>.card-right {
   height: 300px;
   display: flex;
   flex-flow: column;
@@ -133,48 +139,31 @@ body > .container > .box-top {
   justify-content: space-between;
 }
 
-.container
-  > .box-top
-  > .box-left
-  > .box-left-card-weather
-  > .card-right
-  > .card-explain {
+.container>.box-top>.box-left>.box-left-card-weather>.card-right>.card-explain {
   font-size: 20px;
-  font-weight: 300;
+  font-weight: 200;
   line-height: 22px;
   text-align: center;
+  color: rgb(255, 255, 255);
 }
 
-.container
-  > .box-top
-  > .box-left
-  > .box-left-card-weather
-  > .card-right
-  > .card-temp {
+.container>.box-top>.box-left>.box-left-card-weather>.card-right>.card-temp {
   font-family: "Designer";
   font-size: 72px;
   font-weight: 400;
-  line-height: 79.2px;
+  line-height: 60px;
   text-align: center;
+  color: rgb(255, 255, 255);
 }
 
-.container
-  > .box-top
-  > .box-left
-  > .box-left-card-weather
-  > .card-right
-  > .card-temp
-  > span {
+.container>.box-top>.box-left>.box-left-card-weather>.card-right>.card-temp>span {
   font-family: "Designer";
   font-size: 32px;
-  /* 아래 코드로 인해 현재온도 글씨가 내려감 */
-  /* font-weight: 400;
-  line-height: 25.2px;
-  text-align: center; */
+  color: rgb(255, 255, 255);
 }
 
 /* 상단 오른쪽 */
-.container > .box-top > .box-right {
+.container>.box-top>.box-right {
   flex: 1;
   width: 100%;
   height: 100%;
@@ -185,7 +174,7 @@ body > .container > .box-top {
   gap: 16px;
 }
 
-.container > .box-top > .box-right > .box-detail-weather {
+.container>.box-top>.box-right>.box-detail-weather {
   display: grid;
   width: 100%;
   gap: 4px;
@@ -198,20 +187,18 @@ body > .container > .box-top {
   padding: 12px 0px 12px 0px;
   border: 2px solid;
   background-color: #aaaaaa0d;
-  border-image-source: linear-gradient(
-    123.89deg,
-    rgba(170, 170, 170, 0.3) 9.82%,
-    rgba(170, 170, 170, 0.05) 32.32%,
-    rgba(170, 170, 170, 0.2) 61.65%,
-    rgba(170, 170, 170, 0.05) 90.18%
-  );
+  border-image-source: linear-gradient(123.89deg,
+      rgba(170, 170, 170, 0.3) 9.82%,
+      rgba(170, 170, 170, 0.05) 32.32%,
+      rgba(170, 170, 170, 0.2) 61.65%,
+      rgba(170, 170, 170, 0.05) 90.18%);
   box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.15),
     4px 4px 4px 0px rgba(255, 255, 255, 0.1) inset;
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
 }
 
-.container > .box-top > .box-right > .box-detail-weather > .box {
+.container>.box-top>.box-right>.box-detail-weather>.box {
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -220,72 +207,42 @@ body > .container > .box-top {
   gap: 4px;
 }
 
-.container > .box-top > .box-right > .box-detail-weather > .box > .icon {
+.container>.box-top>.box-right>.box-detail-weather>.box>.icon {
   width: 32px;
   height: 32px;
 }
 
-.container
-  > .box-top
-  > .box-right
-  > .box-detail-weather
-  > .box:nth-of-type(1)
-  > .icon {
+.container>.box-top>.box-right>.box-detail-weather>.box:nth-of-type(1)>.icon {
   background: url(../public/images/humidity-g.png) no-repeat 50% 50%;
   background-size: contain;
 }
 
-.container
-  > .box-top
-  > .box-right
-  > .box-detail-weather
-  > .box:nth-of-type(2)
-  > .icon {
+.container>.box-top>.box-right>.box-detail-weather>.box:nth-of-type(2)>.icon {
   background: url(../public/images/wind.png) no-repeat 50% 50%;
   background-size: contain;
 }
 
-.container
-  > .box-top
-  > .box-right
-  > .box-detail-weather
-  > .box:nth-of-type(3)
-  > .icon {
+.container>.box-top>.box-right>.box-detail-weather>.box:nth-of-type(3)>.icon {
   background: url(../public/images/rain.png) no-repeat 50% 50%;
   background-size: contain;
 }
 
-.container
-  > .box-top
-  > .box-right
-  > .box-detail-weather
-  > .box:nth-of-type(4)
-  > .icon {
+.container>.box-top>.box-right>.box-detail-weather>.box:nth-of-type(4)>.icon {
   background: url(../public/images/humidity-b.png) no-repeat 50% 50%;
   background-size: contain;
 }
 
-.container
-  > .box-top
-  > .box-right
-  > .box-detail-weather
-  > .box:nth-of-type(5)
-  > .icon {
+.container>.box-top>.box-right>.box-detail-weather>.box:nth-of-type(5)>.icon {
   background: url(../public/images/mask.png) no-repeat 50% 50%;
   background-size: contain;
 }
 
-.container
-  > .box-top
-  > .box-right
-  > .box-detail-weather
-  > .box:nth-of-type(6)
-  > .icon {
+.container>.box-top>.box-right>.box-detail-weather>.box:nth-of-type(6)>.icon {
   background: url(../public/images/umbrella-b.png) no-repeat 50% 50%;
   background-size: contain;
 }
 
-.container > .box-top > .box-right > .box-detail-weather > .box > p {
+.container>.box-top>.box-right>.box-detail-weather>.box>p {
   font-size: 32px;
   font-weight: 500;
   line-height: 35.2px;
@@ -295,37 +252,22 @@ body > .container > .box-top {
 }
 
 /* 아래의 코드 4블록이 글씨를 작게함 */
-.container
-  > .box-top
-  > .box-right
-  > .box-detail-weather
-  > .box:nth-of-type(4)
-  > p {
+.container>.box-top>.box-right>.box-detail-weather>.box:nth-of-type(4)>p {
   font-size: 24px;
   line-height: 26.4px;
 }
 
-.container
-  > .box-top
-  > .box-right
-  > .box-detail-weather
-  > .box:nth-of-type(5)
-  > p {
+.container>.box-top>.box-right>.box-detail-weather>.box:nth-of-type(5)>p {
   font-size: 24px;
   line-height: 26.4px;
 }
 
-.container
-  > .box-top
-  > .box-right
-  > .box-detail-weather
-  > .box:nth-of-type(6)
-  > p {
+.container>.box-top>.box-right>.box-detail-weather>.box:nth-of-type(6)>p {
   font-size: 24px;
   line-height: 26.4px;
 }
 
-.container > .box-top > .box-right > .box-detail-weather > .box > p > span {
+.container>.box-top>.box-right>.box-detail-weather>.box>p>span {
   font-size: 12px;
   font-weight: 300;
   line-height: 13.2px;
@@ -340,7 +282,7 @@ body > .container > .box-top {
   text-align: center;
 } */
 
-.container > .box-top > .box-right > .centered-text {
+.container>.box-top>.box-right>.centered-text {
   width: 100%;
   gap: 8px;
   display: flex;
@@ -349,7 +291,7 @@ body > .container > .box-top {
   justify-content: center;
 }
 
-.container > .box-top > .box-right > .centered-text > p {
+.container>.box-top>.box-right>.centered-text>p {
   font-size: 16px;
   font-weight: 400;
   line-height: 22.4px;
@@ -357,7 +299,7 @@ body > .container > .box-top {
   color: rgba(170, 170, 170, 1);
 }
 
-.container > .box-top > .box-right > .box-sun {
+.container>.box-top>.box-right>.box-sun {
   width: 100%;
   display: flex;
   flex-flow: row;
@@ -368,55 +310,53 @@ body > .container > .box-top {
   padding: 12px 28px 12px 28px;
   border: 2px solid;
   background-color: #aaaaaa0d;
-  border-image-source: linear-gradient(
-    123.89deg,
-    rgba(170, 170, 170, 0.3) 9.82%,
-    rgba(170, 170, 170, 0.05) 32.32%,
-    rgba(170, 170, 170, 0.2) 61.65%,
-    rgba(170, 170, 170, 0.05) 90.18%
-  );
+  border-image-source: linear-gradient(123.89deg,
+      rgba(170, 170, 170, 0.3) 9.82%,
+      rgba(170, 170, 170, 0.05) 32.32%,
+      rgba(170, 170, 170, 0.2) 61.65%,
+      rgba(170, 170, 170, 0.05) 90.18%);
   box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.15),
     4px 4px 4px 0px rgba(255, 255, 255, 0.1) inset;
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
 }
 
-.container > .box-top > .box-right > .box-sun > .sunset-time {
+.container>.box-top>.box-right>.box-sun>.sunset-time {
   display: flex;
   flex-flow: column;
   align-items: center;
   justify-content: space-between;
 }
 
-.container > .box-top > .box-right > .box-sun > .sunset-time > p {
+.container>.box-top>.box-right>.box-sun>.sunset-time>p {
   font-weight: 300;
   font-size: 16px;
   line-height: 22.4px;
   color: rgba(170, 170, 170, 1);
 }
 
-.container > .box-top > .box-right > .box-sun > .sunset-time > .sunup-icon {
+.container>.box-top>.box-right>.box-sun>.sunset-time>.sunup-icon {
   width: 24px;
   height: 24px;
   background: url(../public/images/sunup.png) no-repeat 50% 50%;
   background-size: contain;
 }
 
-.container > .box-top > .box-right > .box-sun > .sunset-time > .sundown-icon {
+.container>.box-top>.box-right>.box-sun>.sunset-time>.sundown-icon {
   width: 24px;
   height: 24px;
   background: url(../public/images/sundown.png) no-repeat 50% 50%;
   background-size: contain;
 }
 
-.box-top > .box-right > .box-sun > .sunset-bar {
+.box-top>.box-right>.box-sun>.sunset-bar {
   width: 100%;
   height: 10px;
   border-radius: 5px;
   background: #1e1e1e;
 }
 
-.box-top > .box-right > .box-sun > .sunset-bar > .sunset-bar-now {
+.box-top>.box-right>.box-sun>.sunset-bar>.sunset-bar-now {
   height: 10px;
   border-radius: 5px;
   background: linear-gradient(0.25turn, #0befa1, #5b82fd);
@@ -429,7 +369,7 @@ body > .container > .box-top {
 } */
 
 /* 24시간 날씨 테이블 */
-.container > .weather-table {
+.container>.weather-table {
   position: relative;
   width: 100%;
   display: flex;
@@ -442,7 +382,30 @@ body > .container > .box-top {
   box-shadow: 4px 4px 15px 0px rgba(0, 0, 0, 0.1) inset;
 }
 
-.container > .weather-table > .weather-list {
+.container>.weather-table-day {
+  display: flex;
+  flex-flow: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 132px;
+  margin-left: 20px;
+}
+
+.container>.weather-table-day>.today,
+.tomorrow,
+.after-tomorrow {
+  font-size: 16px;
+  font-weight: 500;
+  align-items: center;
+  line-height: 22.4px;
+  color: rgba(170, 170, 170, 1);
+}
+
+.container>.weather-table-day>.select-day {
+  color: rgba(255, 255, 255, 1);
+}
+
+.container>.weather-table>.weather-list {
   width: 100%;
   display: flex;
   flex-flow: row;
@@ -453,12 +416,12 @@ body > .container > .box-top {
   scrollbar-width: none;
 }
 
-.container > .weather-table > .weather-list::-webkit-scrollbar {
+.container>.weather-table>.weather-list::-webkit-scrollbar {
   display: none;
 }
 
 /* 시간별 날씨 정보 -> 각각 요소 */
-.container > .weather-table > .weather-list > .weather-element {
+.container>.weather-table>.weather-list>.weather-element {
   position: relative;
   flex: 1;
   display: flex;
@@ -473,34 +436,11 @@ body > .container > .box-top {
   gap: 2px;
 }
 
-.container > .weather-table > .weather-list > .weather-element:last-child {
+.container>.weather-table>.weather-list>.weather-element:last-child {
   border-right: none;
 }
 
-.container > .weather-table > .weather-list > .weather-element.last::after {
-  content: "";
-  width: 99%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.3);
-  z-index: 1;
-}
-
-.container
-  > .weather-table
-  > .weather-list
-  > .weather-element.current-rec::after {
-  content: "";
-  position: absolute;
-  border: 3px solid rgb(170, 170, 170);
-  border-radius: 12px;
-  width: 99%;
-  height: 180px;
-}
-
-.container > .weather-table > .weather-list > .weather-element > .element-date {
+.container>.weather-table>.weather-list>.weather-element>.element-date {
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -508,85 +448,43 @@ body > .container > .box-top {
   gap: 2px;
 }
 
-.container
-  > .weather-table
-  > .weather-list
-  > .weather-element
-  > .element-date
-  > .text-element-day {
-  font-weight: 600;
-  font-size: 16px;
-}
-
-.container
-  > .weather-table
-  > .weather-list
-  > .weather-element
-  > .element-date
-  > .text-element-time {
+.container>.weather-table>.weather-list>.weather-element>.element-date>.text-element-day {
   font-size: 12px;
   font-weight: 300;
+  color: rgba(255, 255, 255, 1);
 }
 
-.container
-  > .weather-table
-  > .weather-list
-  > .weather-element
-  > .img-element-weather {
+.container>.weather-table>.weather-list>.weather-element>.element-date>.text-element-time {
+  font-weight: 600;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 1);
+}
+
+.container>.weather-table>.weather-list>.weather-element>.img-element-weather {
   display: flex;
   flex-flow: column;
   align-items: center;
   justify-content: space-around;
-  width: 24px;
-  height: 24px;
+  width: 64px;
+  height: 64px;
   /* background: url(../public/images/${weatherCode}.png) no-repeat 50% 50%; */
   background-size: contain;
 }
 
-.container > .weather-table > .weather-list > .weather-element > .element-temp {
+.container>.weather-table>.weather-list>.weather-element>.element-temp {
   font-weight: 400;
   font-size: 36px;
+  color: rgba(255, 255, 255, 1);
 }
 
-.container
-  > .weather-table
-  > .weather-list
-  > .weather-element
-  > .element-temp
-  > span {
+.container>.weather-table>.weather-list>.weather-element>.element-temp>span {
   font-weight: 400;
   font-size: 16px;
+
+  color: rgba(255, 255, 255, 1);
 }
 
-.container > .weather-table > .arrow {
-  position: absolute;
-  display: flex;
-  flex-flow: row;
-  align-items: center;
-  justify-content: space-between;
-  width: 1136px;
-  height: 48px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-}
-
-.container > .weather-table > .arrow > .arrow-left {
-  /* visibility: hidden;
-  pointer-events: none; */
-  width: 48px;
-  height: 48px;
-  background: url(../public/images/left.png) no-repeat 50% 50%;
-  background-size: contain;
-}
-
-.container > .weather-table > .arrow > .arrow-right {
-  width: 48px;
-  height: 48px;
-  background: url(../public/images/right.png) no-repeat 50% 50%;
-  background-size: contain;
-}
+/* 화살표 삭제 */
 
 footer {
   display: flex;
@@ -600,19 +498,19 @@ footer {
   padding: 12px;
 }
 
-footer > .footer-logo {
+footer>.footer-logo {
   color: rgba(170, 170, 170, 1);
   font-size: 14px;
   font-weight: 300;
 }
 
-footer > .copyright {
+footer>.copyright {
   color: rgba(170, 170, 170, 1);
   font-size: 14px;
   font-weight: 400;
 }
 
-footer > .box-sns {
+footer>.box-sns {
   width: 64px;
   gap: 16px;
   display: flex;
@@ -621,7 +519,7 @@ footer > .box-sns {
   justify-content: space-around;
 }
 
-footer > .box-sns > .Notion {
+footer>.box-sns>.Notion {
   width: 24px;
   height: 24px;
   background: url(../public/images/Notion.png) no-repeat 50% 50%;
@@ -629,7 +527,7 @@ footer > .box-sns > .Notion {
   border: none;
 }
 
-footer > .box-sns > .Github {
+footer>.box-sns>.Github {
   width: 24px;
   height: 24px;
   background: url(../public/images/Github.png) no-repeat 50% 50%;
@@ -639,72 +537,86 @@ footer > .box-sns > .Github {
 
 /* tablet */
 @media (max-width: 1024px) {
-  body > .container {
+  body>.container {
     width: 602px;
     padding-right: 48px;
     padding-left: 48px;
+    padding-top: 48px;
   }
 
   /* 상단 */
-  body > .container > .box-top {
+  body>.container>.box-top {
     flex-flow: column;
   }
 
-  .container > .weather-table > .weather-list {
+  .container>.box-top>.box-left>.box-left-info {
+    padding: 4px;
+  }
+
+  /* 추가 */
+  .container>.box-top>.box-left>.box-left-info>.box-date {
+    gap: 8px;
+  }
+
+  .container>.weather-table>.weather-list {
     justify-content: left;
   }
 
   /* 시간별 날씨 정보 -> 각각 요소 */
-  .container > .weather-table > .weather-list > .weather-element {
+  .container>.weather-table>.weather-list>.weather-element {
     flex: none;
     width: 120px;
     height: 150px;
-  }
-
-  /* 날씨테이블 화살표 */
-  .container > .weather-table > .arrow {
-    width: 602px;
-  }
-
-  footer {
-    width: 1024px;
   }
 }
 
 /* mobile */
 @media (max-width: 550px) {
+
   /* container */
-  body > .container {
+  body>.container {
     width: 390px;
     padding-right: 16px;
     padding-left: 16px;
+    padding-top: 16px;
+    align-items: center;
   }
 
-  /* 상단 */
-  body > .container > .box-top {
+  .container>.box-top>.box-left>.box-left-info {
     flex-flow: column;
+    padding: 0px;
+    gap: 8px;
   }
 
-  .container > .box-top > .box-left > .box-left-card-weather {
+  .container>.box-top>.box-left>.box-left-info>.box-location>.text-location {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .container>.box-top>.box-left>.box-left-info>.box-date {
+    width: 100%;
+    flex-flow: row;
+  }
+
+  .container>.box-top>.box-left>.box-left-card-weather {
     z-index: 1;
     position: relative;
     flex-flow: column;
     padding: 24px 0px;
   }
 
-  .container > .box-top > .box-left > .box-left-card-weather > .img-weather {
+  .container>.box-top>.box-left>.box-left-card-weather>.img-weather {
     position: absolute;
-    width: 200px;
-    height: 200px;
-    top: 44px;
+    top: 0px;
+    transform: scale(66%);
   }
 
-  .container > .box-top > .box-left > .box-left-card-weather > .card-right {
+  .container>.box-top>.box-left>.box-left-card-weather>.card-right {
     align-items: center;
   }
 
   /* 상단 오른쪽 */
-  .container > .box-top > .box-right {
+  .container>.box-top>.box-right {
     gap: 12px;
     /* position relative는 position relative가 되어있는 자신으로부터 움직이겠다는 것 */
     /* position absolute는 position relative가 되어있는 부모요소로부터 움직이겠다는 것 */
@@ -712,66 +624,56 @@ footer > .box-sns > .Github {
     top: -36px;
   }
 
-  .container > .box-top > .box-right > .box-detail-weather {
+  .container>.box-top>.box-right>.box-detail-weather {
     padding: 24px 0px 12px 0px;
   }
 
-  .container > .box-top > .box-right > .box-detail-weather > .box > p {
+  .container>.box-top>.box-right>.box-detail-weather>.box>p {
     font-size: 24px;
     line-height: 26.4px;
   }
 
-  /* 24시간 날씨 테이블 */
-  .container > .weather-table {
-    width: 390px;
-    overflow: hidden;
-    background-color: rgba(0, 0, 0, 0);
+  /* 아래의 코드 4블록이 글씨를 작게함 */
+  .container>.box-top>.box-right>.box-detail-weather>.box:nth-of-type(4)>p {
+    font-size: 20px;
+    line-height: 22px;
+  }
+
+  .container>.box-top>.box-right>.box-detail-weather>.box:nth-of-type(5)>p {
+    font-size: 20px;
+    line-height: 22px;
+  }
+
+  .container>.box-top>.box-right>.box-detail-weather>.box:nth-of-type(6)>p {
+    font-size: 20px;
+    line-height: 22px;
+  }
+
+  .container>.weather-table-day {
+    justify-content: center;
+    width: 100%;
+    margin: 0px;
+    gap: 24px;
     position: relative;
     top: -36px;
   }
 
-  .container > .weather-table > .weather-list {
+  /* 24시간 날씨 테이블 */
+  .container>.weather-table {
     width: 336px;
+    position: relative;
+    top: -36px;
+  }
+
+  .container>.weather-table>.weather-list {
     background-color: rgba(24, 24, 24, 1);
-    justify-content: left;
     border-radius: 32px;
   }
 
   /* 시간별 날씨 정보 -> 각각 요소 */
-  .container > .weather-table > .weather-list > .weather-element {
+  .container>.weather-table>.weather-list>.weather-element {
     margin: 0px;
-    flex: none;
     width: 112px;
-    height: 150px;
-  }
-
-  .container
-    > .weather-table
-    > .weather-list
-    > .weather-element:nth-of-type(1) {
-    display: none;
-  }
-
-  .container
-    > .weather-table
-    > .weather-list
-    > .weather-element.current-rec::after {
-    box-sizing: border-box;
-    height: 150px;
-  }
-
-  .container > .weather-table > .arrow {
-    width: 390px;
-  }
-
-  .container > .weather-table > .arrow > .arrow-left {
-    width: 24px;
-    height: 24px;
-  }
-
-  .container > .weather-table > .arrow > .arrow-right {
-    width: 24px;
-    height: 24px;
   }
 
   footer {
@@ -783,12 +685,12 @@ footer > .box-sns > .Github {
     align-items: start;
   }
 
-  footer > .footer-logo {
+  footer>.footer-logo {
     font-size: 14px;
     font-weight: 500;
   }
 
-  footer > .copyright {
+  footer>.copyright {
     font-size: 12px;
     font-weight: 400;
   }
