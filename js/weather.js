@@ -46,10 +46,10 @@ function runProgram() {
       한계 : 받아온 api정보는 3시간 단위이기 때문에 정확한 날씨가 아닌 가장 최근 기록된 날씨이다.
       활용 : api정보의 3번째 데이터(list[2])를 활용
       */
-          const weatherDescription = weatherData.list[2].weather[0].description; // 상태(ex:맑음)
-          const temperature = weatherData.list[2].main.temp.toFixed(0); //온도
-          const humidity = weatherData.list[2].main.humidity; //습도
-          const windSpeed = weatherData.list[2].wind.speed; //풍속
+          const weatherDescription = weatherData.list[0].weather[0].description; // 상태(ex:맑음)
+          const temperature = weatherData.list[0].main.temp.toFixed(0); //온도
+          const humidity = weatherData.list[0].main.humidity; //습도
+          const windSpeed = weatherData.list[0].wind.speed; //풍속
           // const maxTemperature = weatherData.list[2].main.temp_max;    //3시간 동안 최고온도
           // const minTemperature = weatherData.list[2].main.temp_min;   //3시간 동안 최저온도
           const sunriseTimeUTC = new Date(weatherData.city.sunrise * 1000); // UTC 시간으로 일몰 시간을 가져옴
@@ -79,7 +79,7 @@ function runProgram() {
             .padStart(2, "0"); // getMinutes()를 사용하여 한국 시간의 분을 가져옴
           const formattedSunsetTime = `${sunsetHour}:${sunsetMinute}`; // 형식화된 일몰 시간을 생성
           const currentDate = new Date(); //현재 날짜 얻어옴
-          const weatherIconCode = weatherData.list[2].weather[0].icon;
+          const weatherIconCode = weatherData.list[0].weather[0].icon;
 
           //현재 시각을 원하는 포맷으로 출력하기 위한 처리
           const month = currentDate.toLocaleString("default", {
@@ -90,9 +90,8 @@ function runProgram() {
           let hour = currentDate.getHours();
           const minute = currentDate.getMinutes();
 
-          const formattedDate = `${month} ${day}일, ${year} ${hour}:${
-            minute < 10 ? "0" : ""
-          }${minute}`;
+          const formattedDate = `${month} ${day}일, ${year} ${hour}:${minute < 10 ? "0" : ""
+            }${minute}`;
 
           //정보들을 HTML로 출력하기 위해 ID 설정
           const timeElement = document.getElementById("current-time");
@@ -384,13 +383,16 @@ function display24WeatherData(weatherData) {
 
   // 받아온 날씨 데이터를 배열에 입력
   for (let i = 0; i <= 7; i++) {
-    const time = weatherData.list[i].dt_txt;
+    // const time = weatherData.list[i].dt_txt;
+    const timeUTC = new Date(weatherData.list[i].dt_txt); // UTC 기준 시간
+    const timeKST = new Date(timeUTC.getTime() + (9 * 60 * 60 * 1000)); // 한국 시간으로 변환
+
     const temperature = weatherData.list[i].main.temp.toFixed(0); //정수로 반올림
     const weatherIconCode = weatherData.list[i].weather[0].icon;
     // 날씨 정보 객체 생성 및 배열에 추가
     const weatherInfo = {
-      day: time.substr(5, 2) + "." + time.substr(8, 2), // 날짜만 표시 (ex: 03.15)
-      hour: time.substr(11, 5), // 시간만 표시 (ex: 18:00)
+      day: (timeKST.getMonth() + 1).toString().padStart(2, '0') + "." + timeKST.getDate().toString().padStart(2, '0'), // 날짜만 표시 (ex: 03.15)
+      hour: timeKST.getHours().toString().padStart(2, '0') + ":" + timeKST.getMinutes().toString().padStart(2, '0'), // 시간만 표시 (ex: 18:00)
       temperature: temperature,
       weatherIconCode: weatherIconCode, // 날씨 코드
     };
@@ -420,6 +422,52 @@ function display24WeatherData(weatherData) {
   });
 }
 
+// /*
+// 6번째 함수 : 내일 날씨 데이터 8개 출력
+// 구현 : 필터링
+// */
+// function displayTomorrowWeather(weatherData) {
+//   const currentDate = new Date();
+
+//   // 내일 계산
+//   const tomorrow = new Date(currentDate);
+//   tomorrow.setDate(currentDate.getDate() + 1); //내일까지 필터링
+
+//   // 내일 데이터 추출
+//   const tomorrowWeatherData = weatherData.list.filter((item) => {
+//     const date = new Date(item.dt_txt);
+//     return date.getDate() === tomorrow.getDate();
+//   });
+
+//   // 날씨 정보를 표시할 요소를 가져옴 (출력할 위치에 맞게 수정해야 함)
+//   const weatherListElement = document.querySelector(".weather-list");
+
+//   // 날씨 정보 배열을 반복하여 요소 생성
+//   tomorrowWeatherData.forEach((data) => {
+//     // 날씨 요소 생성
+//     const weatherElement = document.createElement("div");
+//     weatherElement.classList.add("weather-element");
+
+//     // 요소 내용 설정
+//     const time = data.dt_txt;
+//     const temperature = data.main.temp.toFixed(0);
+//     const weatherIconCode = data.weather[0].icon;
+//     const day = time.substr(5, 2) + "." + time.substr(8, 2); // 날짜만 표시 (ex: 03.15)
+//     const hour = time.substr(11, 5); // 시간만 표시 (ex: 18:00)
+
+//     weatherElement.innerHTML = `
+//       <div class="element-date">
+//         <p class="text-element-day">${day}</p>
+//         <p class="text-element-time">${hour}</p>
+//       </div>
+//       <img class="img-element-weather" src="./public/images/${weatherIconCode}.png" alt="Weather Icon">
+//       <p class="element-temp">${temperature}<span>°</span></p>
+//     `;
+
+//     // 생성한 요소를 weatherListElement에 추가
+//     weatherListElement.appendChild(weatherElement);
+//   });
+// }
 /*
 6번째 함수 : 내일 날씨 데이터 8개 출력
 구현 : 필터링
@@ -433,25 +481,27 @@ function displayTomorrowWeather(weatherData) {
 
   // 내일 데이터 추출
   const tomorrowWeatherData = weatherData.list.filter((item) => {
-    const date = new Date(item.dt_txt);
-    return date.getDate() === tomorrow.getDate();
+    const timeUTC = new Date(item.dt_txt); // UTC 기준 시간
+    const timeKST = new Date(timeUTC.getTime() + (9 * 60 * 60 * 1000)); // 한국 시간으로 변환
+    return timeKST.getDate() === tomorrow.getDate();
   });
 
   // 날씨 정보를 표시할 요소를 가져옴 (출력할 위치에 맞게 수정해야 함)
   const weatherListElement = document.querySelector(".weather-list");
 
   // 날씨 정보 배열을 반복하여 요소 생성
-  tomorrowWeatherData.forEach((data) => {
+  tomorrowWeatherData.slice(0, 8).forEach((data) => { // 처음 8개만 출력하도록 slice 사용
     // 날씨 요소 생성
     const weatherElement = document.createElement("div");
     weatherElement.classList.add("weather-element");
 
     // 요소 내용 설정
-    const time = data.dt_txt;
+    const timeUTC = new Date(data.dt_txt); // UTC 기준 시간
+    const timeKST = new Date(timeUTC.getTime() + (9 * 60 * 60 * 1000)); // 한국 시간으로 변환
     const temperature = data.main.temp.toFixed(0);
     const weatherIconCode = data.weather[0].icon;
-    const day = time.substr(5, 2) + "." + time.substr(8, 2); // 날짜만 표시 (ex: 03.15)
-    const hour = time.substr(11, 5); // 시간만 표시 (ex: 18:00)
+    const day = (timeKST.getMonth() + 1).toString().padStart(2, '0') + "." + timeKST.getDate().toString().padStart(2, '0'); // 날짜만 표시 (ex: 03.15)
+    const hour = timeKST.getHours().toString().padStart(2, '0') + ":" + timeKST.getMinutes().toString().padStart(2, '0'); // 시간만 표시 (ex: 18:00)
 
     weatherElement.innerHTML = `
       <div class="element-date">
@@ -467,6 +517,53 @@ function displayTomorrowWeather(weatherData) {
   });
 }
 
+
+// /*
+// 7번째 함수 : 내일 모레 날씨 데이터 8개 출력
+// 구현 : 필터링
+// */
+// function display3Weather(weatherData) {
+//   const currentDate = new Date();
+
+//   // 내일 계산
+//   const tomorrow = new Date(currentDate);
+//   tomorrow.setDate(currentDate.getDate() + 2); //모레까지 필터링
+
+//   // 내일 데이터 추출
+//   const tomorrowWeatherData = weatherData.list.filter((item) => {
+//     const date = new Date(item.dt_txt);
+//     return date.getDate() === tomorrow.getDate();
+//   });
+
+//   // 날씨 정보를 표시할 요소를 가져옴 (출력할 위치에 맞게 수정해야 함)
+//   const weatherListElement = document.querySelector(".weather-list");
+
+//   // 날씨 정보 배열을 반복하여 요소 생성
+//   tomorrowWeatherData.forEach((data) => {
+//     // 날씨 요소 생성
+//     const weatherElement = document.createElement("div");
+//     weatherElement.classList.add("weather-element");
+
+//     // 요소 내용 설정
+//     const time = data.dt_txt;
+//     const temperature = data.main.temp.toFixed(0);
+//     const weatherIconCode = data.weather[0].icon;
+//     const day = time.substr(5, 2) + "." + time.substr(8, 2); // 날짜만 표시 (ex: 03.15)
+//     const hour = time.substr(11, 5); // 시간만 표시 (ex: 18:00)
+
+//     weatherElement.innerHTML = `
+//       <div class="element-date">
+//         <p class="text-element-day">${day}</p>
+//         <p class="text-element-time">${hour}</p>
+//       </div>
+//       <img class="img-element-weather" src="./public/images/${weatherIconCode}.png" alt="Weather Icon">
+//       <p class="element-temp">${temperature}<span>°</span></p>
+//     `;
+
+//     // 생성한 요소를 weatherListElement에 추가
+//     weatherListElement.appendChild(weatherElement);
+//   });
+// }
 /*
 7번째 함수 : 내일 모레 날씨 데이터 8개 출력
 구현 : 필터링
@@ -474,31 +571,33 @@ function displayTomorrowWeather(weatherData) {
 function display3Weather(weatherData) {
   const currentDate = new Date();
 
-  // 내일 계산
+  // 내일 모레 계산
   const tomorrow = new Date(currentDate);
-  tomorrow.setDate(currentDate.getDate() + 2); //모레까지 필터링
+  tomorrow.setDate(currentDate.getDate() + 2); //내일까지 필터링
 
-  // 내일 데이터 추출
+  // 내일 모레 데이터 추출
   const tomorrowWeatherData = weatherData.list.filter((item) => {
-    const date = new Date(item.dt_txt);
-    return date.getDate() === tomorrow.getDate();
+    const timeUTC = new Date(item.dt_txt); // UTC 기준 시간
+    const timeKST = new Date(timeUTC.getTime() + (9 * 60 * 60 * 1000)); // 한국 시간으로 변환
+    return timeKST.getDate() === tomorrow.getDate();
   });
 
   // 날씨 정보를 표시할 요소를 가져옴 (출력할 위치에 맞게 수정해야 함)
   const weatherListElement = document.querySelector(".weather-list");
 
   // 날씨 정보 배열을 반복하여 요소 생성
-  tomorrowWeatherData.forEach((data) => {
+  tomorrowWeatherData.slice(0, 8).forEach((data) => { // 처음 8개만 출력하도록 slice 사용
     // 날씨 요소 생성
     const weatherElement = document.createElement("div");
     weatherElement.classList.add("weather-element");
 
     // 요소 내용 설정
-    const time = data.dt_txt;
+    const timeUTC = new Date(data.dt_txt); // UTC 기준 시간
+    const timeKST = new Date(timeUTC.getTime() + (9 * 60 * 60 * 1000)); // 한국 시간으로 변환
     const temperature = data.main.temp.toFixed(0);
     const weatherIconCode = data.weather[0].icon;
-    const day = time.substr(5, 2) + "." + time.substr(8, 2); // 날짜만 표시 (ex: 03.15)
-    const hour = time.substr(11, 5); // 시간만 표시 (ex: 18:00)
+    const day = (timeKST.getMonth() + 1).toString().padStart(2, '0') + "." + timeKST.getDate().toString().padStart(2, '0'); // 날짜만 표시 (ex: 03.15)
+    const hour = timeKST.getHours().toString().padStart(2, '0') + ":" + timeKST.getMinutes().toString().padStart(2, '0'); // 시간만 표시 (ex: 18:00)
 
     weatherElement.innerHTML = `
       <div class="element-date">
