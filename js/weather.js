@@ -116,7 +116,7 @@ function runProgram() {
           todaysunsetTimeElement.innerHTML = formattedSunsetTime;
           currentWindElement.innerHTML = `${windSpeed}` + "<span>m/s</span>";
           // weatherIconElement.src = iconUrl;
-          weatherIconElement.classList.add(`css-${weatherIconCode}`);
+          weatherIconElement.className = `img-weather css-${weatherIconCode}`;
 
           /*
       2번째 기능 : 현재강수량 출력 함수 호출
@@ -422,52 +422,6 @@ function display24WeatherData(weatherData) {
   });
 }
 
-// /*
-// 6번째 함수 : 내일 날씨 데이터 8개 출력
-// 구현 : 필터링
-// */
-// function displayTomorrowWeather(weatherData) {
-//   const currentDate = new Date();
-
-//   // 내일 계산
-//   const tomorrow = new Date(currentDate);
-//   tomorrow.setDate(currentDate.getDate() + 1); //내일까지 필터링
-
-//   // 내일 데이터 추출
-//   const tomorrowWeatherData = weatherData.list.filter((item) => {
-//     const date = new Date(item.dt_txt);
-//     return date.getDate() === tomorrow.getDate();
-//   });
-
-//   // 날씨 정보를 표시할 요소를 가져옴 (출력할 위치에 맞게 수정해야 함)
-//   const weatherListElement = document.querySelector(".weather-list");
-
-//   // 날씨 정보 배열을 반복하여 요소 생성
-//   tomorrowWeatherData.forEach((data) => {
-//     // 날씨 요소 생성
-//     const weatherElement = document.createElement("div");
-//     weatherElement.classList.add("weather-element");
-
-//     // 요소 내용 설정
-//     const time = data.dt_txt;
-//     const temperature = data.main.temp.toFixed(0);
-//     const weatherIconCode = data.weather[0].icon;
-//     const day = time.substr(5, 2) + "." + time.substr(8, 2); // 날짜만 표시 (ex: 03.15)
-//     const hour = time.substr(11, 5); // 시간만 표시 (ex: 18:00)
-
-//     weatherElement.innerHTML = `
-//       <div class="element-date">
-//         <p class="text-element-day">${day}</p>
-//         <p class="text-element-time">${hour}</p>
-//       </div>
-//       <img class="img-element-weather" src="./public/images/${weatherIconCode}.png" alt="Weather Icon">
-//       <p class="element-temp">${temperature}<span>°</span></p>
-//     `;
-
-//     // 생성한 요소를 weatherListElement에 추가
-//     weatherListElement.appendChild(weatherElement);
-//   });
-// }
 /*
 6번째 함수 : 내일 날씨 데이터 8개 출력
 구현 : 필터링
@@ -517,53 +471,6 @@ function displayTomorrowWeather(weatherData) {
   });
 }
 
-
-// /*
-// 7번째 함수 : 내일 모레 날씨 데이터 8개 출력
-// 구현 : 필터링
-// */
-// function display3Weather(weatherData) {
-//   const currentDate = new Date();
-
-//   // 내일 계산
-//   const tomorrow = new Date(currentDate);
-//   tomorrow.setDate(currentDate.getDate() + 2); //모레까지 필터링
-
-//   // 내일 데이터 추출
-//   const tomorrowWeatherData = weatherData.list.filter((item) => {
-//     const date = new Date(item.dt_txt);
-//     return date.getDate() === tomorrow.getDate();
-//   });
-
-//   // 날씨 정보를 표시할 요소를 가져옴 (출력할 위치에 맞게 수정해야 함)
-//   const weatherListElement = document.querySelector(".weather-list");
-
-//   // 날씨 정보 배열을 반복하여 요소 생성
-//   tomorrowWeatherData.forEach((data) => {
-//     // 날씨 요소 생성
-//     const weatherElement = document.createElement("div");
-//     weatherElement.classList.add("weather-element");
-
-//     // 요소 내용 설정
-//     const time = data.dt_txt;
-//     const temperature = data.main.temp.toFixed(0);
-//     const weatherIconCode = data.weather[0].icon;
-//     const day = time.substr(5, 2) + "." + time.substr(8, 2); // 날짜만 표시 (ex: 03.15)
-//     const hour = time.substr(11, 5); // 시간만 표시 (ex: 18:00)
-
-//     weatherElement.innerHTML = `
-//       <div class="element-date">
-//         <p class="text-element-day">${day}</p>
-//         <p class="text-element-time">${hour}</p>
-//       </div>
-//       <img class="img-element-weather" src="./public/images/${weatherIconCode}.png" alt="Weather Icon">
-//       <p class="element-temp">${temperature}<span>°</span></p>
-//     `;
-
-//     // 생성한 요소를 weatherListElement에 추가
-//     weatherListElement.appendChild(weatherElement);
-//   });
-// }
 /*
 7번째 함수 : 내일 모레 날씨 데이터 8개 출력
 구현 : 필터링
