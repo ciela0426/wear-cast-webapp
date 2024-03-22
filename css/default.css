@@ -148,7 +148,7 @@ body>.container>.box-top {
 }
 
 .container>.box-top>.box-left>.box-left-card-weather>.card-right>.card-temp {
-  font-family: "Designer";
+  font-family: "designer";
   font-size: 72px;
   font-weight: 400;
   line-height: 60px;
@@ -157,7 +157,7 @@ body>.container>.box-top {
 }
 
 .container>.box-top>.box-left>.box-left-card-weather>.card-right>.card-temp>span {
-  font-family: "Designer";
+  font-family: "designer";
   font-size: 32px;
   color: rgb(255, 255, 255);
 }
