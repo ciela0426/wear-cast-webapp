@@ -1,0 +1,425 @@
+.box-top > .box-left > .box-left-card-weather > .img-weather {
+  position: relative;
+}
+.img-weather > .box-sun-l {
+  display: none;
+  z-index: 8;
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(254, 198, 0, 0.5);
+  filter: blur(50px);
+}
+.img-weather > .sun-l {
+  display: none;
+  z-index: 9;
+  position: absolute;
+  top: 73px;
+  left: 73px;
+  width: 154px;
+  height: 154px;
+}
+.img-weather > .sun-l > circle {
+  fill: url(#sun-l-gradient);
+}
+.img-weather > .box-sun-s {
+  display: none;
+  z-index: 8;
+  position: absolute;
+  top: 30px;
+  left: 34px;
+  width: 142px;
+  height: 142px;
+  border-radius: 50%;
+  background: rgba(254, 198, 0, 0.5);
+  filter: blur(50px);
+}
+.img-weather > .sun-s {
+  display: none;
+  z-index: 9;
+  position: absolute;
+  top: 44px;
+  left: 48px;
+  width: 114px;
+  height: 114px;
+}
+.img-weather > .sun-s > circle {
+  fill: url(#sun-s-gradient);
+}
+.img-weather > .lightening {
+  display: none;
+  z-index: 9;
+  position: absolute;
+  top: 134px;
+  left: 115px;
+  width: 115px;
+  height: 152px;
+}
+.img-weather > .cloud-s {
+  display: none;
+  z-index: 10;
+  position: absolute;
+  top: 76px;
+  left: 57px;
+  width: 202px;
+  height: 146px;
+}
+.img-weather > .cloud-s > path {
+  fill: url(#cloud-s-gradient-light);
+}
+.img-weather > .cloud-l {
+  display: none;
+  z-index: 11;
+  position: absolute;
+  top: 112px;
+  left: 15px;
+  width: 270px;
+  height: 127px;
+}
+.img-weather > .cloud-l > path {
+  fill: url(#cloud-l-gradient);
+}
+.img-weather > .rain {
+  display: none;
+  z-index: 13;
+  position: absolute;
+  top: 190px;
+  left: 77px;
+  width: 188px;
+  height: 80px;
+}
+.img-weather > .fog {
+  display: none;
+  z-index: 20;
+  position: absolute;
+  top: 130px;
+  left: 15px;
+  width: 303px;
+  height: 200px;
+}
+.img-weather > .fog > g {
+  filter: url(#fog-gradient);
+}
+.img-weather > .snow {
+  display: none;
+  z-index: 20;
+  position: absolute;
+  top: 150px;
+  left: 50px;
+  width: 203px;
+  height: 90px;
+}
+.img-weather > .snow > path {
+  fill: #fff;
+}
+
+/* 01d, 01n clear/맑음 */
+.img-weather.css-01d > .sun-l,
+.img-weather.css-01n > .sun-l,
+.img-weather.css-01d > .box-sun-l,
+.img-weather.css-01n > .box-sun-l {
+  display: block;
+}
+.img-weather.css-01d > .box-sun-l,
+.img-weather.css-01n > .box-sun-l {
+  animation: sun 1s linear infinite alternate;
+}
+
+@keyframes sun {
+  0% {
+    top: calc(50% - 96px);
+    left: calc(50% - 96px);
+    width: 192px;
+    height: 192px;
+    background: rgba(254, 198, 0, 0.5);
+  }
+  100% {
+    top: calc(50% - 100px);
+    left: calc(50% - 100px);
+    width: 200px;
+    height: 200px;
+    background: rgba(254, 152, 0, 0.5);
+  }
+}
+/* 02d, 02n 약간 흐림 */
+.img-weather.css-02d > .box-sun-s,
+.img-weather.css-02n > .box-sun-s,
+.img-weather.css-02d > .sun-s,
+.img-weather.css-02n > .sun-s,
+.img-weather.css-02d > .cloud-s,
+.img-weather.css-02n > .cloud-s,
+.img-weather.css-02d > .cloud-l,
+.img-weather.css-02n > .cloud-l {
+  display: block;
+}
+.img-weather.css-02d > .box-sun-s,
+.img-weather.css-02n > .box-sun-s {
+  animation: sun-s 1s linear infinite alternate;
+}
+.img-weather.css-02d > .cloud-s,
+.img-weather.css-02n > .cloud-s {
+  animation: cloud1 1s linear infinite alternate;
+}
+.img-weather.css-02d > .cloud-l,
+.img-weather.css-02n > .cloud-l {
+  animation: cloud2 1s linear infinite alternate;
+}
+@keyframes sun-s {
+  0% {
+    top: 30px;
+    left: 34px;
+    width: 142px;
+    height: 142px;
+    background: rgba(254, 198, 0, 0.5);
+  }
+  100% {
+    top: 30px;
+    left: 32px;
+    width: 146px;
+    height: 146px;
+    background: rgba(254, 152, 0, 0.5);
+  }
+}
+@keyframes cloud1 {
+  0% {
+    top: 68px;
+  }
+  100% {
+    top: 78px;
+  }
+}
+@keyframes cloud2 {
+  0% {
+    top: 129px;
+  }
+  100% {
+    top: 139px;
+  }
+}
+/* 03d, 03n, 04d, 04n clouds/구름/흐림/먹구름 */
+.img-weather.css-03d > .cloud-s,
+.img-weather.css-04d > .cloud-s,
+.img-weather.css-03n > .cloud-s,
+.img-weather.css-04n > .cloud-s,
+.img-weather.css-03d > .cloud-l,
+.img-weather.css-04d > .cloud-l,
+.img-weather.css-03n > .cloud-l,
+.img-weather.css-04n > .cloud-l {
+  display: block;
+}
+.img-weather.css-03d > .cloud-s,
+.img-weather.css-04d > .cloud-s,
+.img-weather.css-03n > .cloud-s,
+.img-weather.css-04n > .cloud-s {
+  animation: cloud1 1s linear infinite alternate;
+}
+.img-weather.css-03d > .cloud-l,
+.img-weather.css-04d > .cloud-l,
+.img-weather.css-03n > .cloud-l,
+.img-weather.css-04n > .cloud-l {
+  animation: cloud2 1s linear infinite alternate;
+}
+.img-weather.css-04d > .cloud-s > path,
+.img-weather.css-04n > .cloud-s > path {
+  fill: url(#cloud-s-gradient-dark);
+}
+
+/* 09d, 09n shower-rain/폭우 */
+.img-weather.css-09d > .cloud-s,
+.img-weather.css-09n > .cloud-s,
+.img-weather.css-09d > .cloud-l,
+.img-weather.css-09n > .cloud-l,
+.img-weather.css-09d > .rain,
+.img-weather.css-09n > .rain {
+  display: block;
+}
+.img-weather.css-09d > .cloud-s,
+.img-weather.css-09n > .cloud-s {
+  animation: cloud3 1.2s linear infinite alternate;
+  left: 50px;
+}
+.img-weather.css-09d > .cloud-l,
+.img-weather.css-09n > .cloud-l {
+  animation: cloud4 1.2s linear infinite alternate;
+  left: 15px;
+}
+.img-weather.css-09d > .rain,
+.img-weather.css-09n > .rain {
+  animation: rain 1.2s linear infinite normal;
+}
+@keyframes rain {
+  0% {
+    opacity: 0;
+    top: 161px;
+    left: 77px;
+  }
+  100% {
+    opacity: 1;
+    top: 190px;
+    left: 40px;
+  }
+}
+@keyframes cloud3 {
+  0% {
+    top: 25px;
+  }
+  100% {
+    top: 28px;
+  }
+}
+@keyframes cloud4 {
+  0% {
+    top: 75px;
+  }
+  100% {
+    top: 78px;
+  }
+}
+/* 10d, 10n 비/rain */
+.img-weather.css-10d > .box-sun-s,
+.img-weather.css-10n > .box-sun-s,
+.img-weather.css-10d > .sun-s,
+.img-weather.css-10n > .sun-s,
+.img-weather.css-10d > .cloud-s,
+.img-weather.css-10n > .cloud-s,
+.img-weather.css-10d > .cloud-l,
+.img-weather.css-10n > .cloud-l,
+.img-weather.css-10d > .rain,
+.img-weather.css-10n > .rain {
+  display: block;
+}
+.img-weather.css-10d > .cloud-s,
+.img-weather.css-10n > .cloud-s {
+  animation: cloud5 1.2s linear infinite alternate;
+  left: 57px;
+}
+.img-weather.css-10d > .cloud-l,
+.img-weather.css-10n > .cloud-l {
+  animation: cloud6 1.2s linear infinite alternate;
+  left: 15px;
+}
+.img-weather.css-10d > .rain,
+.img-weather.css-10n > .rain {
+  animation: rain 1.2s linear infinite normal;
+}
+@keyframes cloud5 {
+  0% {
+    top: 76px;
+  }
+  100% {
+    top: 79px;
+  }
+}
+@keyframes cloud6 {
+  0% {
+    top: 112px;
+  }
+  100% {
+    top: 115px;
+  }
+}
+
+/* 11d, 11n 번개/thunderstorm */
+.img-weather.css-11d > .cloud-s,
+.img-weather.css-11n > .cloud-s,
+.img-weather.css-11d > .cloud-l,
+.img-weather.css-11n > .cloud-l,
+.img-weather.css-11d > .lightening,
+.img-weather.css-11n > .lightening {
+  display: block;
+}
+.img-weather.css-11d > .cloud-s,
+.img-weather.css-11n > .cloud-s {
+  animation: cloud3 1.2s linear infinite alternate;
+  left: 50px;
+}
+.img-weather.css-11d > .cloud-l,
+.img-weather.css-11n > .cloud-l {
+  animation: cloud4 1.2s linear infinite alternate;
+  left: 15px;
+}
+.img-weather.css-11d > .lightening,
+.img-weather.css-11n > .lightening {
+  animation: thunder 2s linear infinite normal;
+}
+@keyframes thunder {
+  0% {
+    top: 120px;
+    left: 140px;
+  }
+  100% {
+    top: 150px;
+    left: 90px;
+  }
+}
+
+/* 13d, 13n 눈/snow */
+.img-weather.css-13d > .cloud-s,
+.img-weather.css-13n > .cloud-s,
+.img-weather.css-13d > .cloud-l,
+.img-weather.css-13n > .cloud-l,
+.img-weather.css-13d > .snow,
+.img-weather.css-13n > .snow {
+  display: block;
+}
+.img-weather.css-13d > .cloud-s,
+.img-weather.css-13n > .cloud-s {
+  animation: cloud3 1.2s linear infinite alternate;
+  left: 48px;
+}
+.img-weather.css-13d > .cloud-l,
+.img-weather.css-13n > .cloud-l {
+  animation: cloud4 1.2s linear infinite alternate;
+  left: 15px;
+}
+.img-weather.css-13d > .snow,
+.img-weather.css-13n > .snow {
+  animation: snow 2s linear infinite normal;
+}
+@keyframes snow {
+  0% {
+    top: 160px;
+    left: 50px;
+  }
+  100% {
+    top: 180px;
+    left: 50px;
+  }
+}
+
+/* 50d, 50n 번개/thunderstorm */
+.img-weather.css-50d > .cloud-s,
+.img-weather.css-50n > .cloud-s,
+.img-weather.css-50d > .cloud-l,
+.img-weather.css-50n > .cloud-l,
+.img-weather.css-50d > .fog,
+.img-weather.css-50n > .fog {
+  display: block;
+}
+.img-weather.css-50d > .cloud-s,
+.img-weather.css-50n > .cloud-s {
+  animation: cloud3 1.2s linear infinite alternate;
+  left: 50px;
+}
+.img-weather.css-50d > .cloud-l,
+.img-weather.css-50n > .cloud-l {
+  animation: cloud4 1.2s linear infinite alternate;
+  left: 15px;
+}
+.img-weather.css-50d > .fog,
+.img-weather.css-50n > .fog {
+  animation: fog 2s linear infinite alternate;
+}
+@keyframes fog {
+  0% {
+    top: 120px;
+    left: 10px;
+    width: 230px;
+    height: 160px;
+  }
+  100% {
+    top: 115px;
+    left: 20px;
+    width: 250px;
+    height: 180px;
+  }
+}
