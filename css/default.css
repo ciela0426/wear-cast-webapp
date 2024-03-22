@@ -135,9 +135,9 @@ body>.container>.box-top {
   font-family: "Designer";
   font-size: 32px;
   /* 아래 코드로 인해 현재온도 글씨가 내려감 */
-  font-weight: 400;
+  /* font-weight: 400;
   line-height: 25.2px;
-  text-align: center;
+  text-align: center; */
 }
 
 /* 상단 오른쪽 */
@@ -527,49 +527,152 @@ footer>.box-sns>.Github {
 
 /* tablet */
 @media (max-width: 1024px) {
-  /* html {
-        width: 100%;
-        height: 100%;
-    }
+  body>.container {
+    width: 602px;
+    padding-right: 48px;
+    padding-left: 48px;
+  }
 
-    body>.container {
-        box-sizing: border-box;
-        width: 602px;
-        padding-right: 56px;
-        padding-left: 56px;
-        margin: auto;
-    }
+  /* 상단 */
+  body>.container>.box-top {
+    flex-flow: column;
+  }
 
-    body>.container>.box-top {
-        flex-flow: column;
-        gap: 12px;
-    }
+  .container>.weather-table>.weather-list {
+    justify-content: left;
+  }
 
-    body>.container>.weather-table>.weather-list {
-        width: 100%;
-    }
+  /* 시간별 날씨 정보 -> 각각 요소 */
+  .container>.weather-table>.weather-list>.weather-element {
+    flex: none;
+    width: 120px;
+    height: 150px;
+  }
 
-    body>.container>.weather-table>.weather-list>.weather-element {
-        flex: none;
-        width: 120px;
-        height: 150px;
-    }
+  /* 날씨테이블 화살표 */
+  .container>.weather-table>.arrow {
+    width: 602px;
+  }
 
-    .container>.weather-table>.weather-list>.weather-element.last::after {
-        content: '';
-        width: 99%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        background-color: rgba(0, 0, 0, 0.3);
-        z-index: 1;
-    } 
-
-    .container>.weather-table>.arrow {
-        width: 602px;   
-    }*/
+  footer {
+    width: 1024px;
+  }
 }
 
 /* mobile */
-@media (max-width: 550px) {}
+@media (max-width: 550px) {
+
+  /* container */
+  body>.container {
+    width: 390px;
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  /* 상단 */
+  body>.container>.box-top {
+    flex-flow: column;
+  }
+
+  .container>.box-top>.box-left>.box-left-card-weather {
+    z-index: 1;
+    position: relative;
+    flex-flow: column;
+    padding: 24px 0px;
+  }
+
+  .container>.box-top>.box-left>.box-left-card-weather>.img-weather {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    top: 44px;
+  }
+
+  .container>.box-top>.box-left>.box-left-card-weather>.card-right {
+    align-items: center;
+  }
+
+  /* 상단 오른쪽 */
+  .container>.box-top>.box-right {
+    gap: 12px;
+    /* position relative는 position relative가 되어있는 자신으로부터 움직이겠다는 것 */
+    /* position absolute는 position relative가 되어있는 부모요소로부터 움직이겠다는 것 */
+    position: relative;
+    top: -36px;
+  }
+
+  .container>.box-top>.box-right>.box-detail-weather {
+    padding: 24px 0px 12px 0px;
+  }
+
+  .container>.box-top>.box-right>.box-detail-weather>.box>p {
+    font-size: 24px;
+    line-height: 26.4px;
+  }
+
+  /* 24시간 날씨 테이블 */
+  .container>.weather-table {
+    width: 390px;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0);
+    position: relative;
+    top: -36px;
+  }
+
+  .container>.weather-table>.weather-list {
+    width: 336px;
+    background-color: rgba(24, 24, 24, 1);
+    justify-content: left;
+    border-radius: 32px;
+  }
+
+  /* 시간별 날씨 정보 -> 각각 요소 */
+  .container>.weather-table>.weather-list>.weather-element {
+    margin: 0px;
+    flex: none;
+    width: 112px;
+    height: 150px;
+  }
+
+  .container>.weather-table>.weather-list>.weather-element:nth-of-type(1) {
+    display: none;
+  }
+
+  .container>.weather-table>.weather-list>.weather-element.current-rec::after {
+    box-sizing: border-box;
+    height: 150px;
+  }
+
+  .container>.weather-table>.arrow {
+    width: 390px;
+  }
+
+  .container>.weather-table>.arrow>.arrow-left {
+    width: 24px;
+    height: 24px;
+  }
+
+  .container>.weather-table>.arrow>.arrow-right {
+    width: 24px;
+    height: 24px;
+  }
+
+  footer {
+    flex-flow: column;
+    width: 390px;
+    padding: 12px 10px 24px 10px;
+    gap: 8px;
+    justify-content: flex-start;
+    align-items: start;
+  }
+
+  footer>.footer-logo {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  footer>.copyright {
+    font-size: 12px;
+    font-weight: 400;
+  }
+}
