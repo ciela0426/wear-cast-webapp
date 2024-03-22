@@ -317,7 +317,7 @@ function displayWeatherInfo(weatherData) {
 
   // 'Rain'인 경우 'weatherData.list[2].rain.1h'의 정보를 가져와 rainAmount 변수에 할당
   if (weatherData.list[0].weather[0].main === "Rain") {
-    rainAmount = weatherData.list[0].rain ? weatherData.list[2].rain["3h"] : 0;
+    rainAmount = weatherData.list[0].rain ? weatherData.list[0].rain["3h"] : 0;
   }
 
   // 비가 내린 경우에만 비가 내린 양을 출력
