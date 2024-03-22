@@ -152,38 +152,65 @@ function runProgram() {
       0: 오늘24시간날씨, 1: 내일 날씨, 2: 내일 모레날씨
       현재 반복되도록 구현
       */
-          let currentDataIndex = 0; // 현재 표시 중인 데이터 인덱스 (0: 24시간 데이터, 1: 내일 데이터, 2: 내일 모레 데이터)
+          // let currentDataIndex = 0; // 현재 표시 중인 데이터 인덱스 (0: 24시간 데이터, 1: 내일 데이터, 2: 내일 모레 데이터)
+          // displayData();
+
+          // // 좌측 화살표 클릭 시 이벤트 처리
+          // document
+          //   .getElementById("arrowLeft")
+          //   .addEventListener("click", function () {
+          //     showPreviousData();
+          //   });
+
+          // // 우측 화살표 클릭 시 이벤트 처리
+          // document
+          //   .getElementById("arrowRight")
+          //   .addEventListener("click", function () {
+          //     showNextData();
+          //   });
+
+          // function showPreviousData() {
+          //   currentDataIndex--;
+          //   if (currentDataIndex < 0) {
+          //     currentDataIndex = 2; // 최초로 넘어갔을 때는 내일 모레 데이터로 설정
+          //   }
+          //   displayData();
+          // }
+
+          // function showNextData() {
+          //   currentDataIndex++;
+          //   if (currentDataIndex > 2) {
+          //     currentDataIndex = 0; // 마지막 데이터에서 넘어갔을 때는 다시 24시간 데이터로 설정
+          //   }
+          //   displayData();
+          // }
+          // 현재, 내일, 모레 버튼 요소 가져오기
+          const todayButton = document.querySelector('.today');
+          const tomorrowButton = document.querySelector('.tomorrow');
+          const afterTomorrowButton = document.querySelector('.after-tomorrow');
+
+          // 현재 표시 중인 데이터 인덱스 (0: 24시간 데이터, 1: 내일 데이터, 2: 내일 모레 데이터)
+          let currentDataIndex = 0;
+
+          // 버튼 클릭 이벤트 설정
+          todayButton.addEventListener('click', function () {
+            currentDataIndex = 0;
+            displayData();
+          });
+
+          tomorrowButton.addEventListener('click', function () {
+            currentDataIndex = 1;
+            displayData();
+          });
+
+          afterTomorrowButton.addEventListener('click', function () {
+            currentDataIndex = 2;
+            displayData();
+          });
+
+          // 초기 데이터 표시
           displayData();
 
-          // 좌측 화살표 클릭 시 이벤트 처리
-          document
-            .getElementById("arrowLeft")
-            .addEventListener("click", function () {
-              showPreviousData();
-            });
-
-          // 우측 화살표 클릭 시 이벤트 처리
-          document
-            .getElementById("arrowRight")
-            .addEventListener("click", function () {
-              showNextData();
-            });
-
-          function showPreviousData() {
-            currentDataIndex--;
-            if (currentDataIndex < 0) {
-              currentDataIndex = 2; // 최초로 넘어갔을 때는 내일 모레 데이터로 설정
-            }
-            displayData();
-          }
-
-          function showNextData() {
-            currentDataIndex++;
-            if (currentDataIndex > 2) {
-              currentDataIndex = 0; // 마지막 데이터에서 넘어갔을 때는 다시 24시간 데이터로 설정
-            }
-            displayData();
-          }
 
           // 데이터 표시 함수
           function displayData() {
@@ -202,7 +229,17 @@ function runProgram() {
               // 내일 모레 데이터 표시
               display3Weather(weatherData);
             }
-          }
+
+            // 현재 선택된 버튼 강조 표시
+            const buttons = [todayButton, tomorrowButton, afterTomorrowButton];
+            buttons.forEach((button, index) => {
+              if (index === currentDataIndex) {
+                button.classList.add('select-day');
+              } else {
+                button.classList.remove('select-day');
+              }
+            });
+            }
         });
 
       /*
