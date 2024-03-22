@@ -140,7 +140,7 @@ function runProgram() {
       */
           const outfitElement = document.getElementById("outfit"); //HTML의 id:outfit와 연결
           const suggestedOutfit = suggestOutfit(temperature); //함수 호출
-          outfitElement.innerHTML = `추천 옷차림: ${suggestedOutfit}`; //HTML에 출력
+          outfitElement.innerHTML = `${suggestedOutfit}`; //HTML에 출력
 
           /*
       6번째 기능: 하루 진행도 함수 호출
@@ -316,8 +316,8 @@ function displayWeatherInfo(weatherData) {
   let rainAmount = 0; // 비가 내린 양을 저장할 변수를 초기화
 
   // 'Rain'인 경우 'weatherData.list[2].rain.1h'의 정보를 가져와 rainAmount 변수에 할당
-  if (weatherData.list[2].weather[0].main === "Rain") {
-    rainAmount = weatherData.list[2].rain ? weatherData.list[2].rain["1h"] : 0;
+  if (weatherData.list[0].weather[0].main === "Rain") {
+    rainAmount = weatherData.list[0].rain ? weatherData.list[2].rain["3h"] : 0;
   }
 
   // 비가 내린 경우에만 비가 내린 양을 출력
