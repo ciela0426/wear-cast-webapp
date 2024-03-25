@@ -4,14 +4,15 @@
 
 html {
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  overflow: scroll;
 }
 
 body {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-color: #1e1e1e;
-  background-attachment: scroll;
+  overflow: scroll;
   display: flex;
   flex-flow: column;
   align-items: center;
