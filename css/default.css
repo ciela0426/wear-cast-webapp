@@ -4,13 +4,14 @@
 
 html {
   width: 100%;
-  height: 100%;
+  height: 100vh;
 }
 
 body {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-color: #1e1e1e;
+  background-attachment: scroll;
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -604,6 +605,7 @@ footer>.box-sns>.Github:hover {
 
 /* tablet */
 @media (max-width: 1024px) {
+
   body>.container {
     width: 602px;
     padding-right: 48px;
@@ -764,5 +766,147 @@ footer>.box-sns>.Github:hover {
   footer>.copyright {
     font-size: 12px;
     font-weight: 400;
+  }
+}
+
+/* light */
+@media (prefers-color-scheme: light) {
+
+  body {
+    /* background-image: (linear-gradient(180deg, #D99FFF 0%, #85E5EF 100%)); */
+    background: linear-gradient(180deg, #D99FFF 0%, #85E5EF 100%);
+  }
+
+  .container>.box-top>.box-left>.box-left-info>.box-location>.icon-location {
+    background: url(../public/images/location_white.png) no-repeat 50% 50%;
+    background-size: contain;
+  }
+
+  .container>.box-top>.box-left>.box-left-info>.box-location>.text-location {
+    color: #FFFFFF;
+  }
+
+  .container>.box-top>.box-left>.box-left-info>.box-date {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .container>.box-top>.box-left>.box-left-info>.box-date>.text-date {
+    color: #FFFFFF;
+  }
+
+  .container>.box-top>.box-left>.box-left-info>.box-date>.icon-refresh {
+    background: url(../public/images/refresh_white.png) no-repeat 50% 50%;
+    background-size: contain;
+  }
+
+  .container>.box-top>.box-right>.box-detail-weather>.box:nth-of-type(1):hover::before,
+  .container>.box-top>.box-right>.box-detail-weather>.box:nth-of-type(2):hover::before,
+  .container>.box-top>.box-right>.box-detail-weather>.box:nth-of-type(3):hover::before,
+  .container>.box-top>.box-right>.box-detail-weather>.box:nth-of-type(4):hover::before,
+  .container>.box-top>.box-right>.box-detail-weather>.box:nth-of-type(5):hover::before,
+  .container>.box-top>.box-right>.box-detail-weather>.box:nth-of-type(6):hover::before {
+    background: #1e1e1e;
+  }
+
+
+  .container>.box-top>.box-right>.box-detail-weather>.box:nth-of-type(1)>.icon {
+    background: url(../public/images/humidity_white.png) no-repeat 50% 50%;
+    background-size: contain;
+  }
+
+  .container>.box-top>.box-right>.box-detail-weather>.box:nth-of-type(2)>.icon {
+    background: url(../public/images/wind_white.png) no-repeat 50% 50%;
+    background-size: contain;
+  }
+
+  .container>.box-top>.box-right>.box-detail-weather>.box:nth-of-type(3)>.icon {
+    background: url(../public/images/rain_white.png) no-repeat 50% 50%;
+    background-size: contain;
+  }
+
+  .container>.box-top>.box-right>.box-detail-weather>.box:nth-of-type(4)>.icon {
+    background: url(../public/images/humidity2_white.png) no-repeat 50% 50%;
+    background-size: contain;
+  }
+
+  .container>.box-top>.box-right>.box-detail-weather>.box:nth-of-type(5)>.icon {
+    background: url(../public/images/mask_white.png) no-repeat 50% 50%;
+    background-size: contain;
+  }
+
+  .container>.box-top>.box-right>.box-detail-weather>.box:nth-of-type(6)>.icon {
+    background: url(../public/images/umbrella_white.png) no-repeat 50% 50%;
+    background-size: contain;
+  }
+
+  .container>.box-top>.box-right>.box-detail-weather>.box>p {
+    color: #FFFFFF;
+  }
+
+  .container>.box-top>.box-right>.box-detail-weather>.box>p>span {
+    color: #FFFFFF;
+  }
+
+  .container>.box-top>.box-right>.centered-text>p {
+    color: #FFFFFF;
+  }
+
+  .container>.box-top>.box-right>.box-sun>.sunset-time>p {
+    color: #FFFFFF;
+  }
+
+  .container>.box-top>.box-right>.box-sun>.sunset-time>.sunup-icon {
+    background: url(../public/images/sunup_white.png) no-repeat 50% 50%;
+    background-size: contain;
+  }
+
+  .container>.box-top>.box-right>.box-sun>.sunset-time>.sundown-icon {
+    background: url(../public/images/sundown_white.png) no-repeat 50% 50%;
+    background-size: contain;
+  }
+
+  .box-top>.box-right>.box-sun>.sunset-bar {
+    background: #FFFFFF;
+  }
+
+  .box-top>.box-right>.box-sun>.sunset-bar>.sunset-bar-now {
+    background: linear-gradient(90deg, #D99FFF 0%, #85E5EF 100%);
+  }
+
+  /* 24시간 날씨 테이블 */
+  .container>.weather-table {
+    background-color: #FFFFFF0D;
+    box-shadow: 4px 4px 15px 0px #0000001A inset;
+  }
+
+  .container>.weather-table>.weather-list {
+    background-color: rgba(255, 255, 225, 0);
+    border-radius: 32px;
+  }
+
+  /* 시간별 날씨 정보 -> 각각 요소 */
+  .container>.weather-table>.weather-list>.weather-element {
+    border-right: 1px solid #FFFFFF;
+  }
+
+  footer>.footer-logo {
+    color: #FFFFFF;
+  }
+
+  footer>.copyright {
+    color: #FFFFFF;
+  }
+
+  footer>.box-sns>.Notion {
+    background: url(../public/images/Notion_white.png) no-repeat 50% 50%;
+    background-size: contain;
+  }
+
+  footer>.box-sns>.Github {
+    background: url(../public/images/Github_white.png) no-repeat 50% 50%;
+    background-size: contain;
   }
 }
